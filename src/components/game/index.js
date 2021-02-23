@@ -1,3 +1,4 @@
 import Game from "./game";
+import ItemCard from "./ItemCard";
 
-export default Game;
+export {Game, ItemCard};

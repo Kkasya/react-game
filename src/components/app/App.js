@@ -1,15 +1,15 @@
 import './App.css';
 import React from 'react';
-import Game from "../game";
+import {Game} from "../game";
 
 
 function App() {
 	return (
 		<>
 			<header >
-				Memory Game
+				<h1 >Memory Game</h1 >
 			</header >
-			<Game pr={ds} />
+			<Game />
 		</>
 	);
 }
