@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ItemCard from "./ItemCard";
+import ContextChooseCard from "../context";
 import './game.css';
 
 const generateCards = (len) => {
-	const arrEmpty = new Array(len / 2).fill(0);
-	const arr = arrEmpty.map((el, id) => el + id);
+	const arr = (new Array(len / 2).fill(0)).map((el, id) => el + id);
 	return [...arr, ...arr];
 };
 
@@ -29,10 +29,13 @@ const CardsComponent = () => {
 }
 
 const Game = () => {
+	const [context, setContext] =useState(null);
 	return (
+		<ContextChooseCard.Provider value={[context, setContext]}>
 		<div >
 			<CardsComponent />
 		</div >
+		</ContextChooseCard.Provider>
 	)
 };
 
