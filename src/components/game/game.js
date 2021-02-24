@@ -1,9 +1,13 @@
 import React from 'react';
-import Cards from "./cards";
+import Cards from "./components/cards";
+import InfoBoard from "./components/info_board";
+
+import './game.css';
 
 const Game = () => {
   return (
-    <div>
+    <div className="game">
+      <InfoBoard />
       <Cards/>
     </div>
   )

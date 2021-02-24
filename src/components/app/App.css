@@ -1,38 +1,18 @@
-.App {
+body {
+  background: url("https://t3.ftcdn.net/jpg/00/62/85/04/360_F_62850401_QHhoOVPftGnBwjgPs1pTzl9I106raPsq.jpg") no-repeat;
+  background-size: cover;
+  text-shadow: 0 0 0.1rem #000;
+}
+
+h1 {
   text-align: center;
+  font-weight: bolder;
+  font-style: italic;
+  font-size: 4rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app {
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 2rem 20rem 0 20rem;
+  border-radius: 0.5rem;
 }

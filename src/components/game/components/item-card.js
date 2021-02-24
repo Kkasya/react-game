@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './game.css';
+import '../game.css';
 
 
 const ItemCard = ({id, el, isClosed, isGuessed, checkCard}) => {

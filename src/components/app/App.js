@@ -5,12 +5,12 @@ import {Game} from "../game";
 
 function App() {
 	return (
-		<>
+		<div className="app">
 			<header >
-				<h1 >Memory Game</h1 >
+				<h1 className="text-secondary">Memory Game</h1 >
 			</header >
 			<Game />
-		</>
+		</div>
 	);
 }
 
