@@ -5,6 +5,7 @@
 .cards {
     flex-wrap: wrap;
     width: 100%;
+    position: relative;
 }
 
 .card-body {
@@ -26,4 +27,24 @@
 #moves, #time {
     padding: 0 1.5rem;
     font-size: 2.2rem;
+}
+
+.start {
+    position: absolute;
+    top: calc(50% - 5rem);
+    left: calc(50% - 9rem);
+    z-index: 1;
+    width: 18rem;
+    height: 10rem;
+    font-size: 5rem;
+    /*background: rgba(78, 172, 146, 0.9);*/
+    /*text-align: center;*/
+    /*border-radius: 1rem;*/
+}
+
+.start p {
+    margin: 0;
+    /*color: #f03765;*/
+    font-size: 5rem;
+font-weight: bolder;
 }

@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import ItemCard from "./item-card";
-import Context from './context'
+import {Context, Context2} from './context'
 
 
 const generateCards = (len) => {
@@ -16,11 +16,12 @@ const items = generateCards(12).map((el, id) => {
 
 const Cards = () => {
   const [contextMove, setContext] = useContext(Context);
+  const [contextStart, setStart] = useContext(Context2);
   const [{cards, openedCard, countOpen}, changeCard] = useState({cards: items, openedCard: null, countOpen: 0});
 
   const openCard = (id) => {
 
-    if (countOpen > 1) return;
+    if (!contextStart || countOpen > 1) return;
 
     const newCountOpen = countOpen + 1;
 

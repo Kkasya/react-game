@@ -1,48 +1,51 @@
 import React, {useContext, useState, useEffect} from 'react';
-import Context from "./context";
+import {Context, Context2} from "./context";
 
 import '../game.css'
 
 const InfoBoard = () => {
-  const [contextMove, setContext] = useContext(Context);
-  const [timer, setTimer] =useState(0);
+	const [contextMove, setContext] = useContext(Context);
+	const [contextStart, setStart] = useContext(Context2);
+	const [timer, setTimer] = useState(0);
 
-  useEffect(() => {
-    let counter;
-    if (timer >= 0) {
-      counter = setTimeout(() => setTimer((c) => c + 1), 1000)
-    }
+	useEffect(() => {
+		let counter = 0;
+		counter = setTimeout(() => setTimer((c) => c + 1), 1000);
 
-    return () => {
-      if (counter) {
-        clearTimeout(counter);
-      }
-    };
-  }, [timer]);
+		return () => {
+			if (counter) {
+				clearTimeout(counter);
+			}
+		};
+	}, [timer]);
 
-  const padTime = (time) => {
-    return String(time).length === 1 ? `0${time}` : `${time}`;
-  };
+	useEffect(() => {
+		setTimer(0);
+	}, [contextStart]);
 
-  const format = (time) => {
-    const min = Math.floor(time / 60);
-    const sec = time % 60;
-    return `${padTime(min)}:${padTime(sec)}`;
-  }
+	const padTime = (time) => {
+		return String(time).length === 1 ? `0${time}` : `${time}`;
+	};
 
-  return (
-    <div className="d-flex justify-content-between text-info">
-      <div className="d-flex info-item">
-        <span>Time:</span>
-        <span id='time' className='text-success'>{format(timer)}</span>
-      </div>
-      <div className="d-flex info-item">
-        <span id='moves' className='text-success'>{contextMove}</span>
-        <span>moves</span>
-      </div>
+	const format = (time) => {
+		const min = Math.floor(time / 60);
+		const sec = time % 60;
+		return `${padTime(min)}:${padTime(sec)}`;
+	}
 
-    </div>
-  )
+	return (
+		<div className="d-flex justify-content-between text-info" >
+			<div className="d-flex info-item" >
+				<span >Time:</span >
+				<span id='time' className='text-success' >{contextStart ? format(timer) : '00:00'}</span >
+			</div >
+			<div className="d-flex info-item" >
+				<span id='moves' className='text-success' >{contextMove}</span >
+				<span >moves</span >
+			</div >
+
+		</div >
+	)
 }
 
 export default InfoBoard;
