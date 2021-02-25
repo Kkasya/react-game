@@ -1,0 +1,24 @@
+.statistics {
+position: absolute;
+    background-color: #06aacc;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.back {
+    font-size: 3rem;
+}
+
+th {
+    font-size: 2rem;
+}
+
+td {
+    font-size: 1.8rem;
+}

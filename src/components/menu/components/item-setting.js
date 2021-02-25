@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../settings.css';
+import '../menu.css';
 
 const ItemSettings = ({title, operation}) => {
   return (

@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {Context, Context2} from "./context";
+import {Context, Context2} from "../../context/context";
 
 import '../game.css'
 

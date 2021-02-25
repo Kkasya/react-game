@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
-
-import './settings.css';
 import ItemSettings from "./components/item-setting";
-import {Context2} from "../game/components/context";
+import {Context2, Context3} from "../context";
 
-const Settings = () => {
+import './menu.css';
+
+
+const Menu = () => {
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
+  const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
 
   const startGame = () => {
     setStart({
@@ -15,9 +17,7 @@ const Settings = () => {
     });
   };
 
-
   const setSettings = () => {
-
   };
 
   const showScores = () => {
@@ -25,7 +25,7 @@ const Settings = () => {
   };
 
   const showStatistics = () => {
-
+    setMenu({contextSettings: contextSettings, contextScore: contextScore, contextStatistics: true});
   };
 
 
@@ -38,7 +38,7 @@ const Settings = () => {
 
 
   return (
-    <div className="settings">
+    <div className="menu">
       {itemsSettings.map(({title, operation}) => {
       return ( <ItemSettings
         key={title}
@@ -50,4 +50,4 @@ const Settings = () => {
   )
 };
 
-export default Settings;
+export default Menu;

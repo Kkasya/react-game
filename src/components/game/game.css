@@ -4,7 +4,6 @@
 
 .game-cards {
     position: relative;
-
 }
 
 .cards {
@@ -14,7 +13,7 @@
 
 .card-body {
     padding: 0;
-    margin: 0.2rem;
+    margin: 0.5rem;
     width: 20%;
     box-shadow: 0 0 1rem rgba(15, 56, 47, 0.9);
 }

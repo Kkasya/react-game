@@ -1,3 +1,3 @@
-import ContextChooseCard from "./contex";
+import {Context, Context2, Context3} from './context';
 
-export default ContextChooseCard;
+export {Context, Context2, Context3};

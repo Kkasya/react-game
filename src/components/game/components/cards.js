@@ -1,7 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import ItemCard from "./item-card";
-import {Context, Context2} from './context'
-
+import {Context, Context2} from "../../context";
 
 const generateCards = (len) => {
   const arr = (new Array(len / 2).fill(0)).map((el, id) => el + id);
