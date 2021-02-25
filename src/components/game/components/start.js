@@ -4,13 +4,19 @@ import {Context2} from "./context";
 import '../game.css';
 
 const Start = () => {
-	const [contextStart, setStart] = useContext(Context2);
+	const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
+
 	const start = () => {
-		setStart(true);
-	}
-return (
+		setStart({
+				contextStart: true,
+				contextExit: contextExit,
+				contextWin: contextWin
+		});
+	};
+
+	return (
 	<div>
-		{ !contextStart ? (<button className="btn btn-info btn-lg start text-secondary"
+		{ !contextStart ? (<button className="btn btn-info btn-lg start "
 						 onClick={start} >
 			Start
 		</button >) : (<></>)}

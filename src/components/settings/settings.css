@@ -1,0 +1,12 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.settings button {
+    margin: 2rem 0;
+    font-size: 2rem;
+    white-space: nowrap;
+}
