@@ -11,16 +11,19 @@
     padding: 0;
     margin: 0.1rem;
     width: 20%;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);;
+    box-shadow: 0 0 1rem rgba(15, 56, 47, 0.9);
 }
-
 
 .info-item {
     font-size: 1.8rem;
     font-weight: bold;
-    padding-bottom: 1rem;
+}
+
+.info-item span {
+    margin: auto 0;
 }
 
 #moves, #time {
     padding: 0 1.5rem;
+    font-size: 2.2rem;
 }

@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import ItemCard from "./item-card";
+import Context from './context'
 
 
 const generateCards = (len) => {
@@ -14,6 +15,7 @@ const items = generateCards(12).map((el, id) => {
 
 
 const Cards = () => {
+  const [contextMove, setContext] = useContext(Context);
   const [{cards, openedCard, countOpen}, changeCard] = useState({cards: items, openedCard: null, countOpen: 0});
 
   const openCard = (id) => {
@@ -27,10 +29,10 @@ const Cards = () => {
       const elem = arr.find((item) => item.id === id);
 
       if (elem.isBlocked) return {cards, openedCard, countOpen};
-
+      setContext((contextMove) => contextMove + 1);
       elem.isClosed = false;
       elem.isBlocked = true;
-      setTimeout(() => checkCards(arr, elem), 200);
+      setTimeout(() => checkCards(arr, elem), 300);
       return {cards: arr, openedCard: openedCard, countOpen: newCountOpen};
     });
   }

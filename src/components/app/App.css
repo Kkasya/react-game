@@ -1,7 +1,7 @@
 body {
   background: url("https://t3.ftcdn.net/jpg/00/62/85/04/360_F_62850401_QHhoOVPftGnBwjgPs1pTzl9I106raPsq.jpg") no-repeat;
   background-size: cover;
-  text-shadow: 0 0 0.1rem #000;
+  text-shadow: 0 0 0.2rem #000;
 }
 
 h1 {
@@ -12,7 +12,9 @@ h1 {
 }
 
 .app {
-  background-color: rgba(255, 255, 255, 0.2);
-  margin: 2rem 20rem 0 20rem;
+  background-color: rgba(71, 237, 200, 0.3);
+  margin: 1rem 20rem 0 20rem;
   border-radius: 0.5rem;
+  padding: 1rem 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
 }
