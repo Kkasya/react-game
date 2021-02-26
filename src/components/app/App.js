@@ -1,9 +1,8 @@
 import './App.css';
 import React, {useState} from 'react';
 import {Game} from "../game";
-import {Context, Context2, Context3} from "../context";
+import {Context, Context2, Context3, Context4} from "../context";
 import Statistics from "../statistics";
-
 
 function App() {
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useState(
@@ -17,6 +16,8 @@ function App() {
     contextWin: false
   });
 
+  const [contextSave, setSave] = useState(false);
+
 
   return (
     <Context3.Provider value={[{contextSettings, contextScore, contextStatistics}, setMenu]}>
@@ -26,7 +27,9 @@ function App() {
         </header>
         <Context.Provider value={[contextMove, setContext]}>
           <Context2.Provider value={[{contextStart, contextExit, contextWin}, setStart]}>
+            <Context4.Provider value={[contextSave, setSave]}>
             <Game/>
+            </Context4.Provider>
           </Context2.Provider>
         </Context.Provider>
         <Statistics/>

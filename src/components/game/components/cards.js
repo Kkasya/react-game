@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import ItemCard from "./item-card";
-import {Context, Context2} from "../../context";
+import {Context, Context2, Context4} from "../../context";
 
 const generateCards = (len) => {
   const arr = (new Array(len / 2).fill(0)).map((el, id) => el + id);
@@ -16,6 +16,7 @@ const items = generateCards(12).map((el, id) => {
 const Cards = () => {
   const [contextMove, setContext] = useContext(Context);
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
+  const [contextSave, setSave] = useContext(Context4);
 
   const [{cards, openedCard, countOpen, countGuessed}, changeCard] = useState(
     {cards: items.map((i) => ({...i})), openedCard: null, countOpen: 0, countGuessed: 0});
@@ -29,7 +30,7 @@ const Cards = () => {
 
   const openCard = (id) => {
 
-    if (!contextStart || countOpen > 1) return;
+    if (!contextStart || contextExit || contextSave || countOpen > 1) return;
 
     const newCountOpen = countOpen + 1;
 
@@ -37,17 +38,15 @@ const Cards = () => {
       const arr = [...cards];
       const elem = arr.find((item) => item.id === id);
 
-      if (elem.isBlocked) return {cards, openedCard, countOpen};
+      if (! elem.isClosed) return {cards, openedCard, countOpen, countGuessed};
       setContext((contextMove) => contextMove + 1);
       elem.isClosed = false;
-      elem.isBlocked = true;
       setTimeout(() => checkCards(arr, elem), 300);
       return {cards: arr, openedCard: openedCard, countOpen: newCountOpen, countGuessed: countGuessed};
     });
   }
 
   const checkCards = (arr, elem) => {
-
     let newOpenCard = null;
     let newCountOpen = countOpen;
     let newCountGuessed = countGuessed;
@@ -59,8 +58,6 @@ const Cards = () => {
       newCountOpen = 0;
       newCountGuessed += 2;
     } else {
-      elem.isBlocked = false;
-      openedCard.isBlocked = false;
       newCountOpen = 0;
       arr.map((elem) => {
         if (!elem.isClosed && !elem.isGuessed) elem.isClosed = true;
@@ -78,7 +75,6 @@ const Cards = () => {
      changeCard({
       cards: arr,
       openedCard: newOpenCard,
-      isBlocked: false,
       countOpen: newCountOpen,
        countGuessed: newCountGuessed
     });
@@ -87,12 +83,12 @@ const Cards = () => {
 
   return (
     <div className="d-flex cards">
-      {cards.map(({id, el, isClosed, isBlocked}) => {
+      {cards.map(({id, el, isClosed, isGuessed}) => {
         return (<ItemCard
           key={id}
           el={el}
           isClosed={isClosed}
-          isBlocked={isBlocked}
+          isGuessed={isGuessed}
           checkCard={() => openCard(id)}
         />)
       })}

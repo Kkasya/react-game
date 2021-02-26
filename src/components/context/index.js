@@ -1,3 +1,3 @@
-import {Context, Context2, Context3} from './context';
+import {Context, Context2, Context3, Context4} from './context';
 
-export {Context, Context2, Context3};
+export {Context, Context2, Context3, Context4};

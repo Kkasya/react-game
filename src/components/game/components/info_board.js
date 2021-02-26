@@ -1,18 +1,19 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {Context, Context2} from "../../context/context";
+import {Context, Context2, Context3, Context4} from "../../context";
 
 import '../game.css'
 
-const InfoBoard = () => {
+const InfoBoard = ({timer, onChangeTime}) => {
   const [contextMove, setContext] = useContext(Context);
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
+  const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
+  const [contextSave, setSave] = useContext(Context4);
 
-  const [timer, setTimer] = useState(0);
 
   useEffect(() => {
     let counter = 0;
-    if (!contextWin) {
-      counter = setTimeout(() => setTimer((c) => c + 1), 1000);
+    if (!contextWin && !contextExit && !contextSave && !contextStatistics) {
+      counter = setTimeout(() => onChangeTime((c) => c + 1), 1000);
     } else counter = timer;
 
     return () => {
@@ -20,10 +21,10 @@ const InfoBoard = () => {
         clearTimeout(counter);
       }
     };
-  }, [timer]);
+  }, [timer, contextExit, contextSave, contextStatistics]);
 
   useEffect(() => {
-    setTimer(0);
+    onChangeTime(0);
   }, [contextStart]);
 
   const padTime = (time) => {
@@ -46,7 +47,6 @@ const InfoBoard = () => {
         <span id='moves' className='text-success'>{contextMove}</span>
         <span>moves</span>
       </div>
-
     </div>
   )
 }
