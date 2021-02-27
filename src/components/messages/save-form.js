@@ -18,7 +18,7 @@ const SaveForm = ({timer}) => {
     const dataUser = JSON.parse(localStorage.getItem('user')) || [];
 
     dataUser.push({
-      'user': label,
+      'user': label.toUpperCase(),
       'moves': contextMove,
       'timer': timer,
       'win': Number(contextWin),

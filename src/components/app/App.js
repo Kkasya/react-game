@@ -2,7 +2,7 @@ import './App.css';
 import React, {useState} from 'react';
 import {Game} from "../game";
 import {Context, Context2, Context3, Context4} from "../context";
-import Statistics from "../statistics";
+import {Statistics, Scores} from "../statistics";
 
 function App() {
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useState(
@@ -33,6 +33,7 @@ function App() {
           </Context2.Provider>
         </Context.Provider>
         <Statistics/>
+        <Scores />
       </div>
     </Context3.Provider>
   );

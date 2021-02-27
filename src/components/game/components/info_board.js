@@ -12,7 +12,7 @@ const InfoBoard = ({timer, onChangeTime}) => {
 
   useEffect(() => {
     let counter = 0;
-    if (!contextWin && !contextExit && !contextSave && !contextStatistics) {
+    if (!contextWin && !contextExit && !contextSave && !contextStatistics && !contextScore) {
       counter = setTimeout(() => onChangeTime((c) => c + 1), 1000);
     } else counter = timer;
 
@@ -21,7 +21,7 @@ const InfoBoard = ({timer, onChangeTime}) => {
         clearTimeout(counter);
       }
     };
-  }, [timer, contextExit, contextSave, contextStatistics]);
+  }, [timer, contextExit, contextSave, contextStatistics, contextScore]);
 
   useEffect(() => {
     onChangeTime(0);

@@ -1,6 +1,6 @@
 .statistics {
-position: absolute;
-    background-color: #9ddeed;
+    position: absolute;
+    background-color: #99cfbf;
     top: 0;
     left: 0;
     right: 0;
@@ -14,7 +14,7 @@ position: absolute;
 
 .back {
     font-size: 3rem;
-margin-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 
 th {

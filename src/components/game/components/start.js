@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {Context2} from "../../context";
 
 import '../game.css';
+import '../../app/App.css';
 
 const Start = () => {
 	const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
@@ -16,7 +17,7 @@ const Start = () => {
 
 	return (
 	<div>
-		{ !contextStart ? (<button className="btn btn-info btn-lg start "
+		{ !contextStart ? (<button className="btn btn-info btn-lg start btnShadow"
 						 onClick={start} >
 			Start
 		</button >) : (<></>)}

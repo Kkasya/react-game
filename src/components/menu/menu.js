@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import ItemSettings from "./components/item-setting";
+import ItemMenu from "./components/item-menu";
 import {Context2, Context3} from "../context";
 
 import './menu.css';
@@ -65,7 +65,7 @@ const Menu = ({timer}) => {
   return (
     <div className="menu">
       {itemsSettings.map(({title, operation}) => {
-        return (<ItemSettings
+        return (<ItemMenu
           key={title}
           title={title}
           operation={operation}
