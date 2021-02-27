@@ -4,52 +4,69 @@ import {Context2, Context3} from "../context";
 
 import './menu.css';
 
+const audio = new Audio('/sounds/btn.mp3');
 
 const Menu = ({timer}) => {
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
 
   const startGame = () => {
-    if (timer) endGame();
-    else {
-      setStart({
-        contextStart: false,
-        contextExit: contextExit,
-        contextWin: contextWin
-      });
+   if(!contextWin) {
+      audio.play();
+      if (timer) endGame();
+      else {
+        setStart({
+          contextStart: false,
+          contextExit: contextExit,
+          contextWin: contextWin
+        });
+      }
     }
   };
 
   const endGame = () => {
+    if (!contextWin) {
+      audio.play();
+
     if (contextStart) setStart({
       contextStart: contextStart,
       contextExit: true,
       contextWin: contextWin
     });
+  }
   };
 
   const setSettings = () => {
-    setMenu({
-      contextSettings: true,
-      contextScore: contextScore,
-      contextStatistics: contextStatistics
-    });
+    if(!contextWin) {
+      audio.play();
+      setMenu({
+        contextSettings: true,
+        contextScore: contextScore,
+        contextStatistics: contextStatistics
+      });
+    }
   };
 
   const showScores = () => {
-    setMenu({
-      contextSettings: contextSettings,
-      contextScore: true,
-      contextStatistics: contextStatistics
-    });
+    if(!contextWin) {
+      audio.play();
+      setMenu({
+        contextSettings: contextSettings,
+        contextScore: true,
+        contextStatistics: contextStatistics
+      });
+    }
   };
 
   const showStatistics = () => {
-    setMenu({
-      contextSettings: contextSettings,
-      contextScore: contextScore,
-      contextStatistics: true
-    });
+    if(!contextWin) {
+      audio.play();
+      setMenu({
+        contextSettings: contextSettings,
+        contextScore: contextScore,
+        contextStatistics: true
+      });
+    }
   };
 
 

@@ -4,10 +4,13 @@ import {Context2} from "../../context";
 import '../game.css';
 import '../../app/App.css';
 
+const audio = new Audio('/sounds/btn.mp3');
+
 const Start = () => {
 	const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
 
 	const start = () => {
+		audio.play();
 		setStart({
 				contextStart: true,
 				contextExit: contextExit,

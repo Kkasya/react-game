@@ -12,7 +12,7 @@ const InfoBoard = ({timer, onChangeTime}) => {
 
   useEffect(() => {
     let counter = 0;
-    if (!contextWin && !contextExit && !contextSave && !contextStatistics && !contextScore) {
+    if (contextStart && !contextWin && !contextExit && !contextSave && !contextStatistics && !contextScore) {
       counter = setTimeout(() => onChangeTime((c) => c + 1), 1000);
     } else counter = timer;
 
@@ -21,11 +21,7 @@ const InfoBoard = ({timer, onChangeTime}) => {
         clearTimeout(counter);
       }
     };
-  }, [timer, contextExit, contextSave, contextStatistics, contextScore]);
-
-  useEffect(() => {
-    onChangeTime(0);
-  }, [contextStart]);
+  }, [timer, contextExit, contextSave, contextStatistics, contextScore, contextStart]);
 
   const padTime = (time) => {
     return String(time).length === 1 ? `0${time}` : `${time}`;
@@ -41,7 +37,7 @@ const InfoBoard = ({timer, onChangeTime}) => {
     <div className="d-flex justify-content-between text-info">
       <div className="d-flex info-item">
         <span>Time:</span>
-        <span id='time' className='text-success'>{contextStart ? format(timer) : '00:00'}</span>
+        <span id='time' className='text-success'>{format(timer)}</span>
       </div>
       <div className="d-flex info-item">
         <span id='moves' className='text-success'>{contextMove}</span>

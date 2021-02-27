@@ -1,14 +1,16 @@
 import React, {useContext, useEffect} from 'react';
 
 import '../game.css';
-import {Context2} from "../../context/context";
+import {Context2, Context4} from "../../context/context";
 
 const Win = () => {
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
+  const [contextSave, setSave] = useContext(Context4);
 
   useEffect(() => {
     setTimeout(() => {
       if (contextWin) {
+        setSave(true);
         setStart({
             contextStart: contextStart,
             contextExit: contextExit,

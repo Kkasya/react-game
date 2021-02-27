@@ -3,26 +3,34 @@ import {Context, Context2, Context4} from "../context";
 
 import './messages.css';
 
-const SaveForm = ({timer}) => {
+const audio = new Audio('/sounds/btn.mp3');
+
+const SaveForm = ({timer, win}) => {
   const [contextMove, setContext] = useContext(Context);
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
   const [contextSave, setSave] = useContext(Context4);
   const [label, setLabel] = useState('');
 
   const closeMessageForm = () => {
+    audio.play();
     setSave(false);
     setStart({contextStart: false, contextExit, contextWin});
   };
 
   const saveGame = () => {
-    const dataUser = JSON.parse(localStorage.getItem('user')) || [];
 
+    localStorage.removeItem('game')
+    localStorage.removeItem('timer');
+    localStorage.removeItem('move');
+
+    const dataUser = JSON.parse(localStorage.getItem('user')) || [];
+    const user = (!label) ? 'anonymous' : label;
     dataUser.push({
-      'user': label.toUpperCase(),
+      'user': user.toUpperCase(),
       'moves': contextMove,
       'timer': timer,
-      'win': Number(contextWin),
-      'lose': Number(!contextWin)
+      'win': Number(win),
+      'lose': Number(!win)
     });
 
     localStorage.setItem('user', JSON.stringify(dataUser));

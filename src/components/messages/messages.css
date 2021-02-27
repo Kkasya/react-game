@@ -4,6 +4,7 @@
     top: calc(50% - 4rem);
     left: calc(50% - 32rem);
     width: 50rem;
+    height: 25rem;
 }
 
 .btn-exit {

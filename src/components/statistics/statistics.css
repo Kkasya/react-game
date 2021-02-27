@@ -26,3 +26,8 @@ th {
 td {
     font-size: 2rem;
 }
+
+.over {
+    overflow: auto;
+    height: 100%;
+}

@@ -3,11 +3,14 @@ import {Context2, Context4} from "../context";
 
 import './messages.css';
 
+const audio = new Audio('/sounds/btn.mp3');
+
 const ExitMessage = () => {
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
   const [contextSave, setSave] = useContext(Context4);
 
   const closeMessageExit = () => {
+    audio.play();
     setStart({contextStart, contextExit: false, contextWin})
   };
 

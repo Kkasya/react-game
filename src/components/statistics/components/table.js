@@ -5,8 +5,8 @@ const Table = ({dataUser, back, parametres, shortTable}) => {
 
 
   return (
-    <div className='statistics'>
-      <table className="table table-hover">
+    <div className='statistics over'>
+      <table className="table table-hover ">
         <thead >
         <tr className="table-dark">
           <th scope="row">#</th>

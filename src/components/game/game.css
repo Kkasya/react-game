@@ -34,11 +34,13 @@
 
 .start {
     position: absolute;
-    top: calc(50% - 7rem);
+    top: calc(50% - 8rem);
     left: calc(50% - 20rem);
     z-index: 1;
-    width: 40rem;
-    height: 14rem;
+    max-width: 40rem;
+    max-height: 14rem;
+    width: 45%;
+    height: 25%;
     font-size: 9rem;
 }
 
@@ -52,4 +54,19 @@
     position: absolute;
     top: calc(50% - 5rem);
     left: calc(50% - 23rem);
+}
+
+.full {
+    width: 2rem;
+    position: absolute;
+    left: 97%;
+    top: 1%;
+    z-index: 1;
+}
+
+.full-screen {
+    width: 98.9vw;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

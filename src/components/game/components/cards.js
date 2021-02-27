@@ -7,26 +7,33 @@ const generateCards = (len) => {
   return [...arr, ...arr].sort(() => Math.random() - 0.5);
 };
 
+const items = () => {
+  return generateCards(12).map((el, id) => {
+    return {id: id, el: el, isClosed: true, isGuessed: false};
+  });
+}
 
-const items = generateCards(12).map((el, id) => {
-  return {id: id, el: el, isClosed: true, isGuessed: false, isBlocked: false};
-});
+const audio = new Audio('/sounds/card.mp3');
 
-
-const Cards = () => {
+const Cards = ({onChangeWin}) => {
   const [contextMove, setContext] = useContext(Context);
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
   const [contextSave, setSave] = useContext(Context4);
 
+  const dataCards = JSON.parse(localStorage.getItem('game')) || items().map((i) => ({...i}));
+
   const [{cards, openedCard, countOpen, countGuessed}, changeCard] = useState(
-    {cards: items.map((i) => ({...i})), openedCard: null, countOpen: 0, countGuessed: 0});
+    {cards: dataCards, openedCard: null, countOpen: 0, countGuessed: 0});
 
   useEffect(() => {
-    if (!contextStart) {
-      changeCard({cards: items.map((i) => ({...i})), openedCard: null, countOpen: 0, countGuessed: 0});
-      setContext(0);
-    }
-  }, [contextStart]);
+    const data = JSON.parse(localStorage.getItem('game')) || items().map((i) => ({...i}));
+    console.log(data)
+    changeCard({
+      cards: data,
+      openedCard: openedCard,
+      countOpen: countOpen,
+      countGuessed: countGuessed
+    });  }, [contextStart]);
 
   const openCard = (id) => {
 
@@ -39,6 +46,8 @@ const Cards = () => {
       const elem = arr.find((item) => item.id === id);
 
       if (! elem.isClosed) return {cards, openedCard, countOpen, countGuessed};
+      audio.pause();
+      audio.play();
       setContext((contextMove) => contextMove + 1);
       elem.isClosed = false;
       setTimeout(() => checkCards(arr, elem), 300);
@@ -65,6 +74,7 @@ const Cards = () => {
     }
 
     if(newCountGuessed === 12) {
+      onChangeWin(true);
       setStart({
           contextStart: contextStart,
           contextExit: contextExit,
@@ -79,7 +89,7 @@ const Cards = () => {
        countGuessed: newCountGuessed
     });
   };
-
+window.addEventListener('unload', () => localStorage.setItem('game', JSON.stringify(cards)));
 
   return (
     <div className="d-flex cards">
