@@ -26,6 +26,12 @@ h1 {
   margin-bottom: 0;
 }
 
+output {
+  font-size: 2rem;
+  color: #1d2124;
+  padding-left: 0.5rem;
+}
+
 .app {
   background-color: rgba(71, 237, 200, 0.3);
   width: 102rem;

@@ -1,6 +1,6 @@
 .statistics {
     position: absolute;
-    background-color: #99cfbf;
+    background: linear-gradient(45deg, #4158d0, #78c2ad, #6cc3d5);
     top: 0;
     left: 0;
     right: 0;

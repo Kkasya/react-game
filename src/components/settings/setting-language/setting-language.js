@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { toggleLang} from "../../../redux/actions";
-import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
+import {Toggle} from "../components";
 
 const LANGUAGES = [
   'en',
@@ -10,28 +10,12 @@ const LANGUAGES = [
 
 const SettingsLanguage = ({lang, toggleLang}) => {
 
-  const langButtons = LANGUAGES.map((lang) => (
-    <ToggleButton
-      value={lang}
-      key={lang}
-      color='primary'
-    >
-      {lang.toUpperCase()}
-    </ToggleButton>
-  ));
-
   return  (
-    <div className="setting-item">
-    <ToggleButtonGroup
-      value={lang}
-      exclusive
-      onChange={toggleLang}
-    >
-      {langButtons}
-    </ToggleButtonGroup>
-    </div>
+  <Toggle
+  data={LANGUAGES}
+  itemSetting={lang}
+  toggle={toggleLang}/>
   );
-
 }
 
 const mapStateToProps = (state) => ({

@@ -1,7 +1,7 @@
 const initialState = {
-  music: '1',
-  sounds: '1',
-  themes: '1',
+  music: '0.5',
+  sound: '0.5',
+  topic: 'Children`s',
   size: '4*3',
   lang: 'en',
 };

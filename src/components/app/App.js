@@ -40,6 +40,7 @@ function App() {
     setContext(Number(move));
   }, [contextStart]);
 
+
   window.addEventListener('unload', () => localStorage.setItem('move',contextMove.toString()));
 
   return (

@@ -1,6 +1,6 @@
 .settings {
     position: absolute;
-    background-color: #99cfbf;
+    background: linear-gradient(45deg, #4158d0, #78c2ad, #6cc3d5);
     top: 0;
     left: 0;
     right: 0;
@@ -9,7 +9,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    padding-top: 1rem;
     z-index: 1;
+}
+
+.settings-wrapper {
+    background: rgba(97, 143, 242, 0.2);
+    border-radius: 3rem;
+    padding: 2rem;
+    color: #56cc9d;
 }
 
 .settings h2 {
@@ -22,10 +30,16 @@
 }
 
 .setting-item {
-    padding: 0.5rem;
+    margin: 1rem;
+    padding: 0;
+    border: none;
+    color: #ffce67;
 }
 
 .setting-item div button {
+    color: white;
     font-size: 3rem;
 }
+
+
 
