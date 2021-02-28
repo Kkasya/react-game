@@ -3,7 +3,6 @@ import ItemTable from "./item-table";
 
 const Table = ({dataUser, back, parametres, shortTable}) => {
 
-
   return (
     <div className='statistics over'>
       <table className="table table-hover ">

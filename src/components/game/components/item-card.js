@@ -5,7 +5,7 @@ import '../game.css';
 
 
 const ItemCard = ({el, isClosed, isGuessed, checkCard}) => {
-	const startPath = '/image/theme/1/';
+	const startPath = '/image/theme/2/';
 
 	const pathImg = (!isGuessed && isClosed) ? 'background.jpg' : `${el}.jpg`;
 

@@ -40,6 +40,12 @@ h1 {
   box-shadow: 2px 2px 5px #000;
 }
 
+.flex-r {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 @media screen and (max-width: 970px) {
   html {
     font-size: 8px;

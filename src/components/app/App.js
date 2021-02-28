@@ -4,6 +4,7 @@ import {Game} from "../game";
 import {Context, Context2, Context3, Context4} from "../context";
 import {Statistics, Scores} from "../statistics";
 import Fullscreen from "./fullscreen";
+import Settings from "../settings/settings";
 
 const audio = new Audio('/sounds/background.mp3');
 audio.volume = 1;
@@ -56,6 +57,7 @@ function App() {
             </Context4.Provider>
           </Context2.Provider>
         </Context.Provider>
+        <Settings />
         <Statistics/>
         <Scores/>
       </div>

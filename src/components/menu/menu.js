@@ -64,7 +64,7 @@ const Menu = ({timer}) => {
       setMenu({
         contextSettings: contextSettings,
         contextScore: contextScore,
-        contextStatistics: true
+        contextStatistics: true,
       });
     }
   };

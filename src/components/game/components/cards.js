@@ -27,13 +27,13 @@ const Cards = ({onChangeWin}) => {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('game')) || items().map((i) => ({...i}));
-    console.log(data)
     changeCard({
       cards: data,
       openedCard: openedCard,
       countOpen: countOpen,
       countGuessed: countGuessed
-    });  }, [contextStart]);
+    });
+  }, [contextStart]);
 
   const openCard = (id) => {
 
@@ -45,12 +45,12 @@ const Cards = ({onChangeWin}) => {
       const arr = [...cards];
       const elem = arr.find((item) => item.id === id);
 
-      if (! elem.isClosed) return {cards, openedCard, countOpen, countGuessed};
+      if (!elem.isClosed) return {cards, openedCard, countOpen, countGuessed};
       audio.pause();
       audio.play();
       setContext((contextMove) => contextMove + 1);
       elem.isClosed = false;
-      setTimeout(() => checkCards(arr, elem), 300);
+      setTimeout(() => checkCards(arr, elem), 500);
       return {cards: arr, openedCard: openedCard, countOpen: newCountOpen, countGuessed: countGuessed};
     });
   }
@@ -73,23 +73,23 @@ const Cards = ({onChangeWin}) => {
       });
     }
 
-    if(newCountGuessed === 12) {
+    if (newCountGuessed === 12) {
       onChangeWin(true);
       setStart({
-          contextStart: contextStart,
-          contextExit: contextExit,
-          contextWin: true
-        });
+        contextStart: contextStart,
+        contextExit: contextExit,
+        contextWin: true
+      });
     }
 
-     changeCard({
+    changeCard({
       cards: arr,
       openedCard: newOpenCard,
       countOpen: newCountOpen,
-       countGuessed: newCountGuessed
+      countGuessed: newCountGuessed
     });
   };
-window.addEventListener('unload', () => localStorage.setItem('game', JSON.stringify(cards)));
+  window.addEventListener('unload', () => localStorage.setItem('game', JSON.stringify(cards)));
 
   return (
     <div className="d-flex cards">
