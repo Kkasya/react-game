@@ -5,12 +5,16 @@ import Table from "./components/table";
 
 import './statistics.css';
 import '../app/App.css';
+import {connect} from "react-redux";
 
 const audio = new Audio('/sounds/btn.mp3');
+const paramEn = ['User', 'Moves', 'Time', 'Win', 'Lose'];
+const paramRu = ['Имя', 'Ходы', 'Время', 'Победа', 'Проигрыш'];
 
-const Statistics = () => {
+const Statistics = ({lang}) => {
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
   const dataUser = getUsers('user', 'low');
+  const param = (lang === 'en') ? paramEn : paramRu;
 
   const back = () => {
     audio.play();
@@ -23,10 +27,14 @@ const Statistics = () => {
       <Table
         back={back}
         dataUser={dataUser}
-        parametres={['User', 'Moves', 'Timer', 'Win', 'Lose']}
+        parametres={param}
       />
     )}
   </>
 };
 
-export default Statistics;
+const mapStateToProps = (state) => ({
+  lang: state.lang
+});
+
+export default connect(mapStateToProps)(Statistics);

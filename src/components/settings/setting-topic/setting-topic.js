@@ -3,14 +3,20 @@ import React from 'react';
 import { toggleTopic} from "../../../redux/actions";
 import {Toggle} from "../components";
 
-const TOPIC = [
+const TOPICEN = [
   'Children`s',
   'Game of Thrones',
   'Figures',
 ];
 
-const SettingsTopic = ({topic, toggleTopic}) => {
+const TOPICRU = [
+  'Детская',
+  'Игры престолов',
+  'Фигуры',
+];
 
+const SettingsTopic = ({topic, toggleTopic, lang}) => {
+const TOPIC = (lang === 'en') ? TOPICEN : TOPICRU;
   return  (
     <Toggle
       data={TOPIC}
@@ -21,6 +27,7 @@ const SettingsTopic = ({topic, toggleTopic}) => {
 
 const mapStateToProps = (state) => ({
   topic: state.topic,
+  lang: state.lang,
 });
 
 const mapDispatchToProps = {

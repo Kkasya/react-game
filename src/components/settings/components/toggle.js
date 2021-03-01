@@ -1,7 +1,14 @@
 import React from 'react';
 import {ToggleButton, ToggleButtonGroup} from "@material-ui/lab";
+import {connect} from "react-redux";
 
-const Toggle = ({data, itemSetting, toggle}) => {
+const audio = new Audio('/sounds/btn.mp3');
+
+const Toggle = ({data, itemSetting, toggle, sound}) => {
+  const play = () => {
+    audio.volume = sound;
+    audio.play();
+  };
 
   const buttons = data.map((itemSetting) => (
     <ToggleButton
@@ -19,6 +26,7 @@ const Toggle = ({data, itemSetting, toggle}) => {
         value={itemSetting}
         exclusive
         onChange={toggle}
+        onClick={play}
       >
         {buttons}
       </ToggleButtonGroup>
@@ -26,4 +34,8 @@ const Toggle = ({data, itemSetting, toggle}) => {
   )
 };
 
-export default Toggle;
+const mapStateToProps = (state) => ({
+  sound: state.sound,
+});
+
+export default connect(mapStateToProps)(Toggle);

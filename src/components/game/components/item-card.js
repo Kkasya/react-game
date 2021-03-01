@@ -1,20 +1,34 @@
 import React
-	from 'react';
+  from 'react';
 
 import '../game.css';
+import {connect} from "react-redux";
 
-
-const ItemCard = ({el, isClosed, isGuessed, checkCard}) => {
-	const startPath = '/image/theme/2/';
-
-	const pathImg = (!isGuessed && isClosed) ? 'background.jpg' : `${el}.jpg`;
-
-
-	return (
-		<div className="card card-body" onClick={checkCard} >
-			<img id={el} src={startPath + pathImg} alt="card" />
-		</div >
-	)
+const TOPIC = {
+  'Children`s': 1,
+  'Game of Thrones': 2,
+  'Figures': 3,
+  'Детская': 1,
+  'Игры престолов': 2,
+  'Фигуры': 3,
 };
 
-export default ItemCard;
+const ItemCard = ({el, isClosed, isGuessed, checkCard, countCards, topic}) => {
+  const startPath = `/image/theme/${TOPIC[topic]}/`;
+
+  const pathImg = (!isGuessed && isClosed) ? 'background.jpg' : `${el}.jpg`;
+  const width = {
+    width: (countCards === 18) ? '15.4%' : '18.8%',
+  };
+  return (
+    <div className="card card-body" style={width} onClick={checkCard}>
+      <img id={el} src={startPath + pathImg} alt="card"/>
+    </div>
+  )
+};
+
+const mapStateToProps = (state) => ({
+  topic: state.topic,
+});
+
+export default connect(mapStateToProps)(ItemCard);

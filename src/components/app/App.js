@@ -5,12 +5,16 @@ import {Context, Context2, Context3, Context4} from "../context";
 import {Statistics, Scores} from "../statistics";
 import Fullscreen from "./fullscreen";
 import Settings from "../settings/settings";
+import {connect} from 'react-redux';
+import Footer from "../footer";
 
 const audio = new Audio('/sounds/background.mp3');
-audio.volume = 1;
 audio.loop = true;
 
-function App() {
+const h1Ru = 'Игра на запоминание';
+const h1En = 'Game Memory';
+
+function App({lang, music}) {
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useState(
     {contextSettings: false, contextScore: false, contextStatistics: false});
 
@@ -28,8 +32,6 @@ function App() {
   const [fullClass, setClass] = useState('');
   let classApp = `app ${fullClass}`;
 
-  audio.play();
-
   const setFull = () => {
     if (fullClass) setClass('');
     else setClass('full-screen');
@@ -40,6 +42,9 @@ function App() {
     setContext(Number(move));
   }, [contextStart]);
 
+  audio.pause();
+  audio.play();
+  audio.volume = music;
 
   window.addEventListener('unload', () => localStorage.setItem('move',contextMove.toString()));
 
@@ -49,7 +54,7 @@ function App() {
         <Fullscreen
           setFull={setFull}/>
         <header>
-          <h1 className="text-danger">Memory Game</h1>
+          <h1 className="text-danger">{ lang === 'en' ? h1En : h1Ru}</h1>
         </header>
         <Context.Provider value={[contextMove, setContext]}>
           <Context2.Provider value={[{contextStart, contextExit, contextWin}, setStart]}>
@@ -61,9 +66,15 @@ function App() {
         <Settings />
         <Statistics/>
         <Scores/>
+        <Footer/>
       </div>
     </Context3.Provider>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  lang: state.lang,
+  music: state.music,
+});
+
+export default connect(mapStateToProps)(App);

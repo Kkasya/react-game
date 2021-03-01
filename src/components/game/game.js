@@ -37,7 +37,6 @@ const Game = () => {
           onChangeWin={onChangeWin}/>
           <Start/>
           <Win/>
-          <Footer/>
         </div>
         <ExitMessage/>
         <SaveForm
@@ -46,10 +45,7 @@ const Game = () => {
       </div>
       <Menu
         timer={timer}/>
-
     </div>
-
-
   )
 };
 

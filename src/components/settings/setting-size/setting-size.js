@@ -4,9 +4,9 @@ import { toggleSize} from "../../../redux/actions";
 import {Toggle} from "../components";
 
 const SIZE = [
-  '4*3',
-  '4*4',
-  '4*5',
+  '2*4',
+  '3*4',
+  '3*6',
 ];
 
 const SettingsSize = ({size, toggleSize}) => {

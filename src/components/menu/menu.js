@@ -1,18 +1,24 @@
 import React, {useContext} from 'react';
 import ItemMenu from "./components/item-menu";
 import {Context2, Context3} from "../context";
+import {connect} from "react-redux";
 
 import './menu.css';
 
 const audio = new Audio('/sounds/btn.mp3');
 
-const Menu = ({timer}) => {
+const Menu = ({timer, lang, sound}) => {
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
 
+  const play = () => {
+    audio.volume = sound;
+    audio.play();
+  };
+
   const startGame = () => {
    if(!contextWin) {
-      audio.play();
+     play();
       if (timer) endGame();
       else {
         setStart({
@@ -26,7 +32,7 @@ const Menu = ({timer}) => {
 
   const endGame = () => {
     if (!contextWin) {
-      audio.play();
+      play();
 
     if (contextStart) setStart({
       contextStart: contextStart,
@@ -38,7 +44,7 @@ const Menu = ({timer}) => {
 
   const setSettings = () => {
     if(!contextWin) {
-      audio.play();
+      play();
       setMenu({
         contextSettings: true,
         contextScore: contextScore,
@@ -49,7 +55,7 @@ const Menu = ({timer}) => {
 
   const showScores = () => {
     if(!contextWin) {
-      audio.play();
+      play();
       setMenu({
         contextSettings: contextSettings,
         contextScore: true,
@@ -60,7 +66,7 @@ const Menu = ({timer}) => {
 
   const showStatistics = () => {
     if(!contextWin) {
-      audio.play();
+      play();
       setMenu({
         contextSettings: contextSettings,
         contextScore: contextScore,
@@ -69,8 +75,7 @@ const Menu = ({timer}) => {
     }
   };
 
-
-  const itemsSettings = [
+  const itemsSettingsEn = [
     {title: 'New game', operation: startGame},
     {title: 'End game', operation: endGame},
     {title: 'Settings', operation: setSettings},
@@ -78,6 +83,14 @@ const Menu = ({timer}) => {
     {title: 'Statistics', operation: showStatistics},
   ];
 
+  const itemsSettingsRu = [
+    {title: 'Новая игра', operation: startGame},
+    {title: 'Закончить игру', operation: endGame},
+    {title: 'Настройки', operation: setSettings},
+    {title: 'Рекорды', operation: showScores},
+    {title: 'Статистика', operation: showStatistics},
+  ];
+  const itemsSettings = (lang === 'en') ? itemsSettingsEn : itemsSettingsRu;
 
   return (
     <div className="menu">
@@ -92,4 +105,9 @@ const Menu = ({timer}) => {
   )
 };
 
-export default Menu;
+const mapStateToProps = (state) => ({
+  lang: state.lang,
+  sound: state.sound,
+});
+
+export default connect(mapStateToProps)(Menu);

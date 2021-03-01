@@ -1,7 +1,8 @@
 import React from 'react';
 import ItemTable from "./item-table";
+import {connect} from "react-redux";
 
-const Table = ({dataUser, back, parametres, shortTable}) => {
+const Table = ({dataUser, back, parametres, shortTable, lang}) => {
 
   return (
     <div className='statistics over'>
@@ -28,10 +29,14 @@ const Table = ({dataUser, back, parametres, shortTable}) => {
       </table>
       <button className="btn btn-info btn-lg back btnShadow"
               onClick={back}>
-        Back
+        {(lang === 'en') ? 'Back' : 'Назад'}
       </button>
     </div>
   )
 };
 
-export default Table;
+const mapStateToProps = (state) => ({
+  lang: state.lang
+});
+
+export default connect(mapStateToProps)(Table);
