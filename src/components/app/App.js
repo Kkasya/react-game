@@ -1,13 +1,14 @@
-import './App.css';
 import React, {useState, useEffect} from 'react';
+import Fullscreen from 'fullscreen-react';
 import {Game} from "../game";
 import {Context, Context2, Context3, Context4} from "../context";
 import {Statistics, Scores} from "../statistics";
-import Fullscreen from "./fullscreen";
+import FullscreenBtn from "./fullscreen";
 import Settings from "../settings/settings";
 import {connect} from 'react-redux';
 import Footer from "../footer";
 import {toggleLang, toggleMusic, toggleSound, toggleTopic} from "../../redux/actions";
+import './App.css';
 
 const audio = new Audio('/sounds/background.mp3');
 audio.loop = true;
@@ -18,6 +19,8 @@ const h1En = 'Game Memory';
 function App({lang, music, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useState(
     {contextSettings: false, contextScore: false, contextStatistics: false});
+
+  const [isEnter, setIsEnter] = useState(false);
 
   const localMove = localStorage.getItem('move') || 0;
 
@@ -30,12 +33,9 @@ function App({lang, music, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
   });
 
   const [contextSave, setSave] = useState(false);
-  const [fullClass, setClass] = useState('');
-  let classApp = `app ${fullClass}`;
 
   const setFull = () => {
-    if (fullClass) setClass('');
-    else setClass('full-screen');
+    setIsEnter((isEnter) => !isEnter);
   };
 
   useEffect(() => {
@@ -73,8 +73,10 @@ function App({lang, music, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
 
   return (
     <Context3.Provider value={[{contextSettings, contextScore, contextStatistics}, setMenu]}>
-      <div className={classApp}>
-        <Fullscreen
+      <Fullscreen isEnter={isEnter} onChange={setIsEnter}>
+        <div className='full-screen'>
+      <div className='app'>
+        <FullscreenBtn
           setFull={setFull}/>
         <header>
           <h1 className="text-danger">{lang === 'en' ? h1En : h1Ru}</h1>
@@ -91,6 +93,8 @@ function App({lang, music, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
         <Scores/>
         <Footer/>
       </div>
+        </div>
+      </Fullscreen>
     </Context3.Provider>
   );
 }

@@ -55,32 +55,32 @@ output {
   align-items: center;
 }
 
-@media screen and (max-width: 970px) {
+@media screen and (max-width: 990px) {
   html {
     font-size: 8px;
   }
 }
 
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 1023px) {
   html {
     font-size: 8px;
   }
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 830px) {
   html {
     font-size: 7px;
   }
 }
 
-@media screen and (max-width: 670px) {
+@media screen and (max-width: 750px) {
   html {
     font-size: 6px;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 620px) {
   html {
-    font-size: 5px;
+    font-size: 4.8px;
   }
 }

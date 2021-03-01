@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../game/game.css';
 
-const Fullscreen = ({setFull}) => {
+const FullscreenBtn = ({setFull}) => {
 
   return (
     <img className='full' src="https://static.thenounproject.com/png/2814-200.png" alt="fullscreen"
@@ -11,4 +11,4 @@ const Fullscreen = ({setFull}) => {
   )
 };
 
-export default Fullscreen;
+export default FullscreenBtn;
