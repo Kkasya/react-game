@@ -1,15 +1,17 @@
 const toggleLang = (lang) => {
+  const newLang = (!lang.target) ? lang : (lang.target.value || lang.target.parentNode.value);
   return {
     type: 'TOGGLE_LANG',
-    value: lang.target.value || lang.target.parentNode.value,
+    value: newLang,
     payload: lang,
   };
 };
 
 const toggleTopic = (topic) => {
+  const newTopic = (!topic.target) ? topic : (topic.target.value || topic.target.parentNode.value);
   return {
     type: 'TOGGLE_TOPIC',
-    value: topic.target.value || topic.target.parentNode.value,
+    value: newTopic,
     payload: topic,
   };
 };
@@ -23,17 +25,19 @@ const toggleSize = (size) => {
 };
 
 const toggleSound = (sound) => {
+  const newSound = (!sound.target) ? sound : (sound.target.value || sound.target.parentNode.value);
   return {
     type: 'TOGGLE_SOUND',
-    value: sound.target.value || sound.target.parentNode.value,
+    value: newSound,
     payload: sound,
   };
 };
 
 const toggleMusic = (music) => {
+  const newMusic = (!music.target) ? music : (music.target.value || music.target.parentNode.value);
   return {
     type: 'TOGGLE_MUSIC',
-    value: music.target.value || music.target.parentNode.value,
+    value: newMusic,
     payload: music,
   };
 };

@@ -16,10 +16,14 @@
 .settings-wrapper {
     background: rgba(97, 143, 242, 0.2);
     border-radius: 3rem;
-    padding: 2rem;
+    margin: 0 1rem;
+    padding: 1rem;
     color: #56cc9d;
 }
 
+.settings-wrapper h3 {
+    text-align: center;
+}
 .settings h2 {
     font-size: 5rem;
     color: #1d3f72;
@@ -38,8 +42,24 @@
 
 .setting-item div button {
     color: white;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
+.hot-keys {
+    font-size: 2.2rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.hot-key {
+    color: #1b1e21;
+}
+
+.action {
+    padding-right: 0.5rem;
+    color: white;
+}
 
 

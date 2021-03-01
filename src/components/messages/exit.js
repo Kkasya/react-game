@@ -18,13 +18,14 @@ const exitRu = {
   close: 'Выйти',
 };
 
-const ExitMessage = ({lang}) => {
+const ExitMessage = ({lang, sound}) => {
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
   const [contextSave, setSave] = useContext(Context4);
 
   const exit = (lang === 'en') ? exitEn : exitRu;
 
   const closeMessageExit = () => {
+    audio.volume = sound;
     audio.play();
     setStart({contextStart, contextExit: false, contextWin})
   };
@@ -66,7 +67,8 @@ const ExitMessage = ({lang}) => {
 };
 
 const mapStateToProps = (state) => ({
-  lang: state.lang
+  lang: state.lang,
+  sound: state.sound
 });
 
 export default connect(mapStateToProps)(ExitMessage);

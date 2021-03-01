@@ -16,6 +16,8 @@ const reducer = (state = initialState, action) => {
 
     default: return state;
   }
+  console.log(action.value)
+
 };
 
 export default reducer;

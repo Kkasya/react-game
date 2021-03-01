@@ -77,7 +77,6 @@ const Menu = ({timer, lang, sound}) => {
 
   const itemsSettingsEn = [
     {title: 'New game', operation: startGame},
-    {title: 'End game', operation: endGame},
     {title: 'Settings', operation: setSettings},
     {title: 'Scores', operation: showScores},
     {title: 'Statistics', operation: showStatistics},
@@ -85,7 +84,6 @@ const Menu = ({timer, lang, sound}) => {
 
   const itemsSettingsRu = [
     {title: 'Новая игра', operation: startGame},
-    {title: 'Закончить игру', operation: endGame},
     {title: 'Настройки', operation: setSettings},
     {title: 'Рекорды', operation: showScores},
     {title: 'Статистика', operation: showStatistics},

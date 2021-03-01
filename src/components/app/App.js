@@ -7,6 +7,7 @@ import Fullscreen from "./fullscreen";
 import Settings from "../settings/settings";
 import {connect} from 'react-redux';
 import Footer from "../footer";
+import {toggleLang, toggleMusic, toggleSound, toggleTopic} from "../../redux/actions";
 
 const audio = new Audio('/sounds/background.mp3');
 audio.loop = true;
@@ -14,7 +15,7 @@ audio.loop = true;
 const h1Ru = 'Игра на запоминание';
 const h1En = 'Game Memory';
 
-function App({lang, music}) {
+function App({lang, music, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useState(
     {contextSettings: false, contextScore: false, contextStatistics: false});
 
@@ -46,7 +47,29 @@ function App({lang, music}) {
   audio.play();
   audio.volume = music;
 
-  window.addEventListener('unload', () => localStorage.setItem('move',contextMove.toString()));
+  window.addEventListener('unload', () => localStorage.setItem('move', contextMove.toString()));
+
+  document.addEventListener('keydown', (e) => {
+    const code = e.keyCode;
+    if (code >= 113 && code <= 118) {
+      e.preventDefault();
+      switch (code) {
+        case 113:
+          const newLang = (lang === 'en') ? 'ru' : 'en';
+          return toggleLang(newLang);
+        case 114:
+          return toggleTopic('Children`s');
+        case 115:
+          return toggleTopic('Game of Thrones');
+        case 116:
+          return toggleTopic('Figures');
+        case 117:
+          return toggleMusic(0);
+        case 118:
+          return toggleSound(0);
+      }
+    }
+  });
 
   return (
     <Context3.Provider value={[{contextSettings, contextScore, contextStatistics}, setMenu]}>
@@ -54,7 +77,7 @@ function App({lang, music}) {
         <Fullscreen
           setFull={setFull}/>
         <header>
-          <h1 className="text-danger">{ lang === 'en' ? h1En : h1Ru}</h1>
+          <h1 className="text-danger">{lang === 'en' ? h1En : h1Ru}</h1>
         </header>
         <Context.Provider value={[contextMove, setContext]}>
           <Context2.Provider value={[{contextStart, contextExit, contextWin}, setStart]}>
@@ -63,7 +86,7 @@ function App({lang, music}) {
             </Context4.Provider>
           </Context2.Provider>
         </Context.Provider>
-        <Settings />
+        <Settings/>
         <Statistics/>
         <Scores/>
         <Footer/>
@@ -77,4 +100,11 @@ const mapStateToProps = (state) => ({
   music: state.music,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  toggleLang,
+  toggleTopic,
+  toggleMusic,
+  toggleSound
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

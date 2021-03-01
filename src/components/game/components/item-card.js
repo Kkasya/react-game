@@ -1,8 +1,7 @@
-import React
-  from 'react';
+import React from 'react';
+import {connect} from "react-redux";
 
 import '../game.css';
-import {connect} from "react-redux";
 
 const TOPIC = {
   'Children`s': 1,
