@@ -1,6 +1,6 @@
 const getUsers = (valueSort, direction, condition) => {
   const dataUser = JSON.parse(localStorage.getItem('user')) || [];
-  dataUser.push({user: "Testirovich", moves: 15, timer: 50, win: 1, lose: 0});
+  dataUser.push({user: "TESTIROVICH", moves: 25, timer: 50, win: 1, lose: 0});
 
   let result;
   if (condition) {

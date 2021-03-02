@@ -9,6 +9,7 @@ import {Context2} from "../context";
 
 import './game.css';
 import {connect} from "react-redux";
+import Autoplay from "./autoplay";
 
 const Game = ({size}) => {
   const localTimer = localStorage.getItem('timer') || 0;
@@ -33,7 +34,8 @@ const Game = ({size}) => {
           timer={timer}
           onChangeTime={onChangeTime}/>
         <div className="game-cards">
-          <Cards
+          <Autoplay
+            isPlay
           onChangeWin={onChangeWin}/>
           <Start/>
           <Win/>

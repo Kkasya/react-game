@@ -1,13 +1,13 @@
 import React, {useContext, useEffect} from 'react';
 
 import '../game.css';
-import {Context2, Context4} from "../../context/context";
+import {Context2, Context4} from "../../context";
 import {connect} from "react-redux";
 
 const audio = new Audio('/sounds/win.mp3')
-const Win = ({sound}) => {
+const Win = ({sound, lang}) => {
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
-  const [contextSave, setSave] = useContext(Context4);
+  const [, setSave] = useContext(Context4);
 
   useEffect(() => {
     if (contextWin) {
@@ -27,13 +27,15 @@ const Win = ({sound}) => {
     }, 4500);
       }, [contextWin]);
 
+  const src = (lang === 'en') ? "/image/winE.gif" : "/image/winR.gif";
+
 return (
   <>
     {contextWin && (<div className="winR">
-      <img src="/image/winR.gif"
+      <img src={src}
            alt="Congratulations"/>
     </div>) && (<div className="winE">
-        <img src="/image/winE.gif"
+        <img src={src}
              alt="Congratulations"/>
       </div>)
     }
@@ -43,6 +45,7 @@ return (
 
 const mapStateToProps = (state) => ({
   sound: state.sound,
+  lang: state.lang,
 });
 
 export default connect(mapStateToProps)(Win);

@@ -2,17 +2,7 @@ import React, {useState, useContext, useEffect} from 'react';
 import ItemCard from "./item-card";
 import {Context, Context2, Context4} from "../../context";
 import {connect} from "react-redux";
-
-const generateCards = (len) => {
-  const arr = (new Array(len / 2).fill(0)).map((el, id) => el + id);
-  return [...arr, ...arr].sort(() => Math.random() - 0.5);
-};
-
-const items = (countCards) => {
-  return generateCards(countCards).map((el, id) => {
-    return {id: id, el: el, isClosed: true, isGuessed: false};
-  });
-};
+import getCards from "../../../utils/getCards";
 
 const SIZE = {
   '2*4': 8,
@@ -29,7 +19,7 @@ const Cards = ({onChangeWin, sound, size}) => {
 
   const countCards = SIZE[size];
 
-  const dataCards = JSON.parse(localStorage.getItem('game')) || items(countCards).map((i) => ({...i}));
+  const dataCards = JSON.parse(localStorage.getItem('game')) || getCards(countCards).map((i) => ({...i}));
 
   const [{cards, openedCard, countOpen, countGuessed}, changeCard] = useState(
     {cards: dataCards, openedCard: null, countOpen: 0, countGuessed: 0});
@@ -42,7 +32,7 @@ const Cards = ({onChangeWin, sound, size}) => {
   };
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('game')) || items(countCards).map((i) => ({...i}));
+    const data = JSON.parse(localStorage.getItem('game')) || getCards(countCards).map((i) => ({...i}));
     changeCard({
       cards: data,
       openedCard: null,
