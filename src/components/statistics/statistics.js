@@ -12,14 +12,14 @@ const paramEn = ['User', 'Moves', 'Time', 'Win', 'Lose'];
 const paramRu = ['Имя', 'Ходы', 'Время', 'Победа', 'Проигрыш'];
 
 const Statistics = ({lang, sound}) => {
-  const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
+  const [{contextStatistics}, setMenu] = useContext(Context3);
   const dataUser = getUsers('user', 'low');
   const param = (lang === 'en') ? paramEn : paramRu;
 
   const back = () => {
     audio.volume = sound;
     audio.play();
-    setMenu({contextSettings: contextSettings, contextScore: contextScore, contextStatistics: false})
+    setMenu({contextStatistics: false})
   };
 
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Fullscreen from 'fullscreen-react';
 import {Game} from "../game";
 import {Context, Context2, Context3, Context4} from "../context";
@@ -7,7 +7,7 @@ import FullscreenBtn from "./fullscreen";
 import Settings from "../settings/settings";
 import {connect} from 'react-redux';
 import Footer from "../footer";
-import {toggleLang, toggleMusic, toggleSound, toggleTopic} from "../../redux/actions";
+import {toggleLang, toggleMusic, toggleSize, toggleSound, toggleTopic} from "../../redux/actions";
 import './App.css';
 
 const audio = new Audio('/sounds/background.mp3');
@@ -16,15 +16,13 @@ audio.loop = true;
 const h1Ru = 'Игра на запоминание';
 const h1En = 'Game Memory';
 
-function App({lang, music, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
+function App({lang, music, sound, topic, size, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useState(
     {contextSettings: false, contextScore: false, contextStatistics: false});
-
   const [isEnter, setIsEnter] = useState(false);
 
   const localMove = localStorage.getItem('move') || 0;
-
-  const [contextMove, setContext] = useState(Number(localMove));
+  const [contextMove, setContextMove] = useState(Number(localMove));
 
   const [{contextStart, contextExit, contextWin}, setStart] = useState({
     contextStart: false,
@@ -38,16 +36,23 @@ function App({lang, music, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
     setIsEnter((isEnter) => !isEnter);
   };
 
-  useEffect(() => {
-    const move = localStorage.getItem('move') || 0;
-    setContext(Number(move));
-  }, [contextStart]);
-
-  audio.pause();
-  audio.play();
   audio.volume = music;
+  const playPromise = audio.play();
 
-  window.addEventListener('unload', () => localStorage.setItem('move', contextMove.toString()));
+  if (playPromise !== undefined) {
+    playPromise
+      .then(_ => {
+        audio.play();
+      })
+      .catch(_ => {
+        audio.pause();
+      });
+  };
+
+  window.addEventListener('unload', () => {
+    localStorage.setItem('move', contextMove.toString());
+    localStorage.setItem('setting', JSON.stringify({lang: lang, topic: topic, sound: sound, music: music, size: size}));
+  });
 
   document.addEventListener('keydown', (e) => {
     const code = e.keyCode;
@@ -81,14 +86,14 @@ function App({lang, music, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
         <header>
           <h1 className="text-danger">{lang === 'en' ? h1En : h1Ru}</h1>
         </header>
-        <Context.Provider value={[contextMove, setContext]}>
+        <Context.Provider value={[contextMove, setContextMove]}>
           <Context2.Provider value={[{contextStart, contextExit, contextWin}, setStart]}>
             <Context4.Provider value={[contextSave, setSave]}>
               <Game/>
+              <Settings/>
             </Context4.Provider>
           </Context2.Provider>
         </Context.Provider>
-        <Settings/>
         <Statistics/>
         <Scores/>
         <Footer/>
@@ -102,6 +107,9 @@ function App({lang, music, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
 const mapStateToProps = (state) => ({
   lang: state.lang,
   music: state.music,
+  topic: state.topic,
+  sound: state.sound,
+  size: state.size
 });
 
 const mapDispatchToProps = {

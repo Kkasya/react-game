@@ -23,9 +23,9 @@ const SIZE = {
 const audio = new Audio('/sounds/card.mp3');
 
 const Cards = ({onChangeWin, sound, size}) => {
-  const [contextMove, setContext] = useContext(Context);
+  const [, setContextMove] = useContext(Context);
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
-  const [contextSave, setSave] = useContext(Context4);
+  const [contextSave] = useContext(Context4);
 
   const countCards = SIZE[size];
 
@@ -42,24 +42,6 @@ const Cards = ({onChangeWin, sound, size}) => {
   };
 
   useEffect(() => {
-    localStorage.removeItem('game')
-    localStorage.removeItem('timer');
-    localStorage.removeItem('move');
-    setStart({
-      contextStart: false,
-      contextExit: contextExit,
-      contextWin: contextWin,
-    });
-    const data = items(countCards).map((i) => ({...i}));
-    changeCard({
-      cards: data,
-      openedCard: null,
-      countOpen: 0,
-      countGuessed: 0
-    });
-  }, [size]);
-
-  useEffect(() => {
     const data = JSON.parse(localStorage.getItem('game')) || items(countCards).map((i) => ({...i}));
     changeCard({
       cards: data,
@@ -67,7 +49,10 @@ const Cards = ({onChangeWin, sound, size}) => {
       countOpen: 0,
       countGuessed: 0
     });
-  }, [contextStart]);
+    const move = localStorage.getItem('move') || 0;
+    setContextMove(Number(move));
+
+  }, [contextStart, size]);
 
   const openCard = (id) => {
 
@@ -82,7 +67,7 @@ const Cards = ({onChangeWin, sound, size}) => {
       if (!elem.isClosed) return {cards, openedCard, countOpen, countGuessed};
       play('/sounds/card.mp3');
 
-      setContext((contextMove) => contextMove + 1);
+      setContextMove((contextMove) => contextMove + 1);
       elem.isClosed = false;
       setTimeout(() => checkCards(arr, elem), 500);
       return {cards: arr, openedCard: openedCard, countOpen: newCountOpen, countGuessed: countGuessed};

@@ -21,8 +21,8 @@ const formRu = {
 };
 
 const SaveForm = ({timer, win, lang, sound}) => {
-  const [contextMove, setContext] = useContext(Context);
-  const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
+  const [contextMove] = useContext(Context);
+  const [{contextStart}, setStart] = useContext(Context2);
   const [contextSave, setSave] = useContext(Context4);
   const [label, setLabel] = useState('');
 
@@ -36,7 +36,7 @@ const SaveForm = ({timer, win, lang, sound}) => {
   const closeMessageForm = () => {
     play();
     setSave(false);
-    setStart({contextStart: false, contextExit, contextWin});
+    setStart({contextStart: false});
   };
 
   const saveGame = () => {

@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Context, Context2, Context3, Context4} from "../../context";
 import {connect} from 'react-redux';
 import '../game.css';
@@ -9,11 +9,10 @@ const moveEn = 'moves';
 const moveRu = 'ходов';
 
 const InfoBoard = ({timer, onChangeTime, lang}) => {
-  const [contextMove, setContext] = useContext(Context);
-  const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
-  const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
-  const [contextSave, setSave] = useContext(Context4);
-
+  const [contextMove] = useContext(Context);
+  const [{contextStart, contextExit, contextWin}] = useContext(Context2);
+  const [{contextSettings, contextScore, contextStatistics}] = useContext(Context3);
+  const [contextSave] = useContext(Context4);
 
   useEffect(() => {
     let counter = 0;
@@ -27,6 +26,10 @@ const InfoBoard = ({timer, onChangeTime, lang}) => {
       }
     };
   }, [timer, contextExit, contextSave, contextStatistics, contextScore, contextStart]);
+
+  useEffect(() => {
+
+  })
 
   const padTime = (time) => {
     return String(time).length === 1 ? `0${time}` : `${time}`;
@@ -53,7 +56,7 @@ const InfoBoard = ({timer, onChangeTime, lang}) => {
 }
 
 const mapStateToProps = (state) => ({
-  lang: state.lang
+  lang: state.lang,
 });
 
 export default connect(mapStateToProps)(InfoBoard);

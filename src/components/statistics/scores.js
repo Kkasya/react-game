@@ -7,14 +7,14 @@ import {connect} from "react-redux";
 const audio = new Audio('/sounds/btn.mp3');
 
 const Scores = ({lang, sound}) => {
-  const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
+  const [{contextScore}, setMenu] = useContext(Context3);
   const dataUser = getUsers('moves', 'low', 'win');
   const param = (lang === 'en') ? ['User', 'Moves', 'Time'] : ['Имя', 'Ходы', 'Время'];
 
   const back = () => {
     audio.volume = sound;
     audio.play();
-    setMenu({contextSettings: contextSettings, contextScore: false, contextStatistics: contextStatistics})
+    setMenu({contextScore: false})
   };
 
   return <>
