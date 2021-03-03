@@ -7,7 +7,7 @@ import './menu.css';
 
 const audio = new Audio('/sounds/btn.mp3');
 
-const Menu = ({timer, lang, sound}) => {
+const Menu = ({timer, isPlay, setIsPlay, lang, sound}) => {
   const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
   const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
 
@@ -17,7 +17,7 @@ const Menu = ({timer, lang, sound}) => {
   };
 
   const startGame = () => {
-   if(!contextWin) {
+   if(!contextWin && !isPlay) {
      play();
       if (timer) endGame();
       else {
@@ -31,7 +31,7 @@ const Menu = ({timer, lang, sound}) => {
   };
 
   const endGame = () => {
-    if (!contextWin) {
+    if(!contextWin && !isPlay) {
       play();
 
     if (contextStart) setStart({
@@ -43,7 +43,7 @@ const Menu = ({timer, lang, sound}) => {
   };
 
   const setSettings = () => {
-    if(!contextWin) {
+    if(!contextWin && !isPlay) {
       play();
       setMenu({
         contextSettings: true,
@@ -54,7 +54,7 @@ const Menu = ({timer, lang, sound}) => {
   };
 
   const showScores = () => {
-    if(!contextWin) {
+    if(!contextWin && !isPlay) {
       play();
       setMenu({
         contextSettings: contextSettings,
@@ -65,7 +65,7 @@ const Menu = ({timer, lang, sound}) => {
   };
 
   const showStatistics = () => {
-    if(!contextWin) {
+    if(!contextWin && !isPlay) {
       play();
       setMenu({
         contextSettings: contextSettings,
@@ -75,11 +75,19 @@ const Menu = ({timer, lang, sound}) => {
     }
   };
 
+  const showAutoplay = () => {
+    if(!contextWin) {
+      play();
+      setIsPlay(true);
+    }
+  };
+
   const itemsSettingsEn = [
     {title: 'New game', operation: startGame},
     {title: 'Settings', operation: setSettings},
     {title: 'Scores', operation: showScores},
     {title: 'Statistics', operation: showStatistics},
+    {title: 'Autoplay', operation: showAutoplay},
   ];
 
   const itemsSettingsRu = [
@@ -87,6 +95,7 @@ const Menu = ({timer, lang, sound}) => {
     {title: 'Настройки', operation: setSettings},
     {title: 'Рекорды', operation: showScores},
     {title: 'Статистика', operation: showStatistics},
+    {title: 'Автопроигрывание', operation: showAutoplay},
   ];
   const itemsSettings = (lang === 'en') ? itemsSettingsEn : itemsSettingsRu;
 

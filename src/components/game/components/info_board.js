@@ -8,7 +8,7 @@ const timeRu = 'Время: ';
 const moveEn = 'moves';
 const moveRu = 'ходов';
 
-const InfoBoard = ({timer, onChangeTime, lang}) => {
+const InfoBoard = ({timer, isPlay, onChangeTime, lang}) => {
   const [contextMove] = useContext(Context);
   const [{contextStart, contextExit, contextWin}] = useContext(Context2);
   const [{contextSettings, contextScore, contextStatistics}] = useContext(Context3);
@@ -16,7 +16,7 @@ const InfoBoard = ({timer, onChangeTime, lang}) => {
 
   useEffect(() => {
     let counter = 0;
-    if (contextStart && !contextWin && !contextExit && !contextSave && !contextStatistics && !contextScore) {
+    if (!isPlay && contextStart && !contextWin && !contextExit && !contextSave && !contextStatistics && !contextScore) {
       counter = setTimeout(() => onChangeTime((c) => c + 1), 1000);
     } else counter = timer;
 
@@ -25,7 +25,7 @@ const InfoBoard = ({timer, onChangeTime, lang}) => {
         clearTimeout(counter);
       }
     };
-  }, [timer, contextExit, contextSave, contextStatistics, contextScore, contextStart]);
+  }, [timer, contextExit, contextSave, contextStatistics, contextScore, contextStart, isPlay]);
 
   useEffect(() => {
 
