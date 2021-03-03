@@ -26,7 +26,7 @@ const Autoplay = ({isPlay, setIsPlay, sound, size}) => {
 	}, [size]);
 
 	const play = (src) => {
-		audio.pause();
+		if (audio) audio.pause();
 		audio.src = src;
 		audio.volume = sound;
 		audio.play();

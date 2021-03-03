@@ -47,7 +47,7 @@ function App({lang, music, sound, topic, size, toggleLang, toggleMusic, toggleSo
       .catch(_ => {
         audio.pause();
       });
-  };
+  }
 
   window.addEventListener('unload', () => {
     localStorage.setItem('move', contextMove.toString());

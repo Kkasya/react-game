@@ -23,7 +23,7 @@
 }
 
 .card-body:active {
-    border: 3px solid #23272b;
+    border: 2px solid #23272b;
 }
 
 .info-item {

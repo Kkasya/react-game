@@ -25,10 +25,19 @@ const Cards = ({onChangeWin, sound, size}) => {
     {cards: dataCards, openedCard: null, countOpen: 0, countGuessed: 0});
 
   const play = (src) => {
-    audio.pause();
     audio.src = src;
     audio.volume = sound;
-    audio.play();
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(_ => {
+          audio.play();
+        })
+        .catch(_ => {
+          audio.pause();
+        });
+    }
   };
 
   useEffect(() => {
@@ -52,7 +61,6 @@ const Cards = ({onChangeWin, sound, size}) => {
 
     changeCard(({cards, openedCard, countOpen, countGuessed}) => {
       const arr = cards.map((i) => ({...i}));
-      console.log(arr);
       const elem = arr.find((item) => item.id === id);
 
       if (!elem.isClosed) return {cards, openedCard, countOpen, countGuessed};
@@ -60,7 +68,7 @@ const Cards = ({onChangeWin, sound, size}) => {
 
       setContextMove((contextMove) => contextMove + 1);
       elem.isClosed = false;
-      setTimeout(() => checkCards(arr, elem), 500);
+      setTimeout(() => checkCards(arr, elem), 300);
       return {cards: arr, openedCard: openedCard, countOpen: newCountOpen, countGuessed: countGuessed};
     });
   }
