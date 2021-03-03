@@ -10,8 +10,6 @@ const SIZE = {
 	'3*6': 18,
 };
 
-const audio = new Audio('/sounds/card.mp3');
-
 const Cards = ({onChangeWin, sound, size}) => {
 	const [, setContextMove] = useContext(Context);
 	const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
@@ -25,19 +23,9 @@ const Cards = ({onChangeWin, sound, size}) => {
 		{cards: dataCards, openedCard: null, countOpen: 0, countGuessed: 0});
 
 	const play = (src) => {
-		audio.src = src;
+		const audio = new Audio(src);
 		audio.volume = sound;
-		const playPromise = audio.play();
-
-		if (playPromise !== undefined) {
-			playPromise
-				.then(_ => {
-					audio.play();
-				})
-				.catch(_ => {
-					audio.pause();
-				});
-		}
+		audio.play();
 	};
 
 	useEffect(() => {
@@ -77,12 +65,14 @@ const Cards = ({onChangeWin, sound, size}) => {
 		let newOpenCard = null;
 		let newCountOpen = countOpen;
 		let newCountGuessed = countGuessed;
+
 		if (openedCard === null) {
 			newOpenCard = elem;
 		} else if (openedCard.el === elem.el) {
 			play('/sounds/right.mp3');
 			elem.isGuessed = true;
-			openedCard.isGuessed = true;
+			const cardArray = arr.find((item) => item.id === openedCard.id);
+			cardArray.isGuessed = true;
 			newCountOpen = 0;
 			newCountGuessed += 2;
 		} else {

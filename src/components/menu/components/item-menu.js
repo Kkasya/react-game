@@ -5,7 +5,6 @@ import '../menu.css';
 import '../../app/App.css'
 
 const ItemMenu = ({title, operation, lang}) => {
-	console.log(lang);
 	const fontSize = {
 		fontSize: (lang === 'en') ? '2rem' : '1.5rem',
 	};
