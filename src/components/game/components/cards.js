@@ -34,7 +34,8 @@ const Cards = () => {
     const newCountOpen = countOpen + 1;
 
     changeCard(({cards, openedCard, countOpen, countGuessed}) => {
-      const arr = [...cards];
+      const arr = cards.map((i) => ({...i}));
+      console.log(arr);
       const elem = arr.find((item) => item.id === id);
 
       if (elem.isBlocked) return {cards, openedCard, countOpen};
