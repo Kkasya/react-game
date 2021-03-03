@@ -17,7 +17,7 @@ const ItemCard = ({el, isClosed, isGuessed, checkCard, countCards, topic}) => {
 
   const pathImg = (!isGuessed && isClosed) ? 'background.jpg' : `${el}.jpg`;
   const width = {
-    width: (countCards === 18) ? '15.4%' : '18.8%',
+    width: (countCards === 18) ? '15.4%' : '20%',
   };
   return (
     <div className="card card-body" style={width} onClick={checkCard}>
