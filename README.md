@@ -1,4 +1,4 @@
-# rsclone
+# react-game
 
 ## Memory Game
 
