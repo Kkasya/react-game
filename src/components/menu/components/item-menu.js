@@ -5,20 +5,20 @@ import '../menu.css';
 import '../../app/App.css'
 
 const ItemMenu = ({title, operation, lang}) => {
-  console.log(lang);
-  const fontSize = {
-    fontSize: (lang === 'en') ? '2rem' : '1.5rem',
-  };
-  return (
-      <button className="btn btn-success btn-lg btnShadow"  style={fontSize}
-              onClick={operation}>
-        {title}
-      </button>
-  )
+	console.log(lang);
+	const fontSize = {
+		fontSize: (lang === 'en') ? '2rem' : '1.5rem',
+	};
+	return (
+		<button className="btn btn-success btn-lg btnShadow" style={fontSize}
+						onClick={operation} >
+			{title}
+		</button >
+	)
 };
 
 const mapStateToProps = (state) => ({
-  lang: state.lang,
+	lang: state.lang,
 });
 
 export default connect(mapStateToProps)(ItemMenu);

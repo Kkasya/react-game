@@ -15,20 +15,20 @@ const Start = ({lang, sound}) => {
 		audio.play();
 
 		setStart({
-				contextStart: true,
-				contextExit: contextExit,
-				contextWin: contextWin
+			contextStart: true,
+			contextExit: contextExit,
+			contextWin: contextWin
 		});
 	};
 
 	return (
-	<div>
-		{ !contextStart ? (<button className="btn btn-info btn-lg start btnShadow"
-						 onClick={start} >
-			{(lang === 'en') ? startEn : startRu}
-		</button >) : (<></>)}
-	</div>
-);
+		<div >
+			{!contextStart ? (<button className="btn btn-info btn-lg start btnShadow"
+																onClick={start} >
+				{(lang === 'en') ? startEn : startRu}
+			</button >) : (<></>)}
+		</div >
+	);
 };
 
 const mapStateToProps = (state) => ({

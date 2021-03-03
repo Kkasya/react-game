@@ -6,10 +6,10 @@ import Win from "./components/win";
 import Menu from "../menu";
 import {ExitMessage, SaveForm} from "../messages";
 import {Context2} from "../context";
-
-import './game.css';
 import {connect} from "react-redux";
 import Autoplay from "./autoplay";
+import './game.css';
+
 
 const Game = ({size}) => {
 	const localTimer = localStorage.getItem('timer') || 0;
