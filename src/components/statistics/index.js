@@ -1,3 +1,4 @@
 import Statistics from "./statistics";
+import Scores from "./scores";
 
-export default Statistics;
+export {Statistics, Scores};

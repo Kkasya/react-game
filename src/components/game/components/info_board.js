@@ -1,18 +1,23 @@
-import React, {useContext, useState, useEffect} from 'react';
-import {Context, Context2} from "../../context/context";
+import React, {useContext, useEffect} from 'react';
+import {Context, Context2, Context3, Context4} from "../../context";
+import {connect} from 'react-redux';
+import '../game.css';
 
-import '../game.css'
+const timeEn = 'Time: ';
+const timeRu = 'Время: ';
+const moveEn = 'moves';
+const moveRu = 'ходов';
 
-const InfoBoard = () => {
-  const [contextMove, setContext] = useContext(Context);
-  const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);
-
-  const [timer, setTimer] = useState(0);
+const InfoBoard = ({timer, onChangeTime, lang}) => {
+  const [contextMove] = useContext(Context);
+  const [{contextStart, contextExit, contextWin}] = useContext(Context2);
+  const [{contextSettings, contextScore, contextStatistics}] = useContext(Context3);
+  const [contextSave] = useContext(Context4);
 
   useEffect(() => {
     let counter = 0;
-    if (!contextWin) {
-      counter = setTimeout(() => setTimer((c) => c + 1), 1000);
+    if (contextStart && !contextWin && !contextExit && !contextSave && !contextStatistics && !contextScore) {
+      counter = setTimeout(() => onChangeTime((c) => c + 1), 1000);
     } else counter = timer;
 
     return () => {
@@ -20,11 +25,11 @@ const InfoBoard = () => {
         clearTimeout(counter);
       }
     };
-  }, [timer]);
+  }, [timer, contextExit, contextSave, contextStatistics, contextScore, contextStart]);
 
   useEffect(() => {
-    setTimer(0);
-  }, [contextStart]);
+
+  })
 
   const padTime = (time) => {
     return String(time).length === 1 ? `0${time}` : `${time}`;
@@ -39,16 +44,19 @@ const InfoBoard = () => {
   return (
     <div className="d-flex justify-content-between text-info">
       <div className="d-flex info-item">
-        <span>Time:</span>
-        <span id='time' className='text-success'>{contextStart ? format(timer) : '00:00'}</span>
+        <span>{(lang === 'en') ? timeEn : timeRu}</span>
+        <span id='time' className='text-success'>{format(timer)}</span>
       </div>
       <div className="d-flex info-item">
         <span id='moves' className='text-success'>{contextMove}</span>
-        <span>moves</span>
+        <span>{(lang === 'en') ? moveEn : moveRu}</span>
       </div>
-
     </div>
   )
 }
 
-export default InfoBoard;
+const mapStateToProps = (state) => ({
+  lang: state.lang,
+});
+
+export default connect(mapStateToProps)(InfoBoard);

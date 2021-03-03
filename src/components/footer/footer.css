@@ -1,0 +1,15 @@
+.footer {
+    display: flex;
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+    justify-content: space-between;
+}
+
+.img-footer {
+    width: 2.5rem;
+    margin-left: 0.5rem;
+}
+
+.rs {
+    width: 5rem;
+}

@@ -1,0 +1,65 @@
+.settings {
+    position: absolute;
+    background: linear-gradient(45deg, #4158d0, #78c2ad, #6cc3d5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    z-index: 1;
+}
+
+.settings-wrapper {
+    background: rgba(97, 143, 242, 0.2);
+    border-radius: 3rem;
+    margin: 0 1rem;
+    padding: 1rem;
+    color: #56cc9d;
+}
+
+.settings-wrapper h3 {
+    text-align: center;
+}
+.settings h2 {
+    font-size: 5rem;
+    color: #1d3f72;
+}
+
+.settings h3 {
+    font-size: 3rem;
+}
+
+.setting-item {
+    margin: 1rem;
+    padding: 0;
+    border: none;
+    color: #ffce67;
+}
+
+.setting-item div button {
+    color: white;
+    font-size: 2.5rem;
+}
+
+.hot-keys {
+    font-size: 2.2rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.hot-key {
+    color: #1b1e21;
+}
+
+.action {
+    padding-right: 0.5rem;
+    color: white;
+}
+
+

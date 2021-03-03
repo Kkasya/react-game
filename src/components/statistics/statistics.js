@@ -1,47 +1,42 @@
 import React, {useContext} from 'react';
 import {Context3} from "../context";
-
+import {getUsers} from "../../utils";
+import Table from "./components/table";
 
 import './statistics.css';
+import '../app/App.css';
+import {connect} from "react-redux";
 
-const Statistics = () => {
-  const [{contextSettings, contextScore, contextStatistics}, setMenu] = useContext(Context3);
+const audio = new Audio('/sounds/btn.mp3');
+const paramEn = ['User', 'Moves', 'Time', 'Win', 'Lose'];
+const paramRu = ['Имя', 'Ходы', 'Время', 'Победа', 'Проигрыш'];
+
+const Statistics = ({lang, sound}) => {
+  const [{contextStatistics}, setMenu] = useContext(Context3);
+  const dataUser = getUsers('user', 'low');
+  const param = (lang === 'en') ? paramEn : paramRu;
+
   const back = () => {
-    setMenu({contextSettings: contextSettings, contextScore: contextScore, contextStatistics: false})
+    audio.volume = sound;
+    audio.play();
+    setMenu({contextStatistics: false})
   };
 
-  return <div>
+
+  return <>
     {contextStatistics && (
-      <div className='statistics'>
-      <table className="table table-hover">
-        <thead>
-        <tr className="table-dark">
-          <th scope="row">#</th>
-          <th scope="row">User</th>
-          <th scope="row">Moves</th>
-          <th scope="row">Time</th>
-          <th scope="row">Win</th>
-          <th scope="row">Lose</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr className="table-info">
-          <th scope="row">Info</th>
-          <th scope="row">Column content</th>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-          <td>Column content</td>
-        </tr>
-        </tbody>
-      </table>
-      <button className="btn btn-info btn-lg back"
-      onClick={back} >
-      Back
-      </button >
-      </div>
-  )}
-  </div>
+      <Table
+        back={back}
+        dataUser={dataUser}
+        parametres={param}
+      />
+    )}
+  </>
 };
 
-export default Statistics;
+const mapStateToProps = (state) => ({
+  lang: state.lang,
+  sound: state.sound,
+});
+
+export default connect(mapStateToProps)(Statistics);
