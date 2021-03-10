@@ -1,16 +1,15 @@
 import React from 'react';
 import {connect} from "react-redux";
-
 import '../menu.css';
 import '../../app/App.css'
 
-const ItemMenu = ({title, operation, lang}) => {
-	const fontSize = {
-		fontSize: (lang === 'en') ? '2rem' : '1.5rem',
-	};
+const ItemMenu = ({title, doOperation, lang}) => {
+	const fontClass =  (lang === 'en') ? 'font-english' : 'font-russian';
+	const itemMenuClass = `btn btn-success btn-lg btnShadow ${fontClass}`;
+
 	return (
-		<button className="btn btn-success btn-lg btnShadow" style={fontSize}
-						onClick={operation} >
+		<button className={itemMenuClass}
+						onClick={doOperation} >
 			{title}
 		</button >
 	)

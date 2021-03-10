@@ -1,11 +1,10 @@
 import React, {useContext} from 'react';
 import {Context2} from "../../context";
 import {connect} from 'react-redux';
+import {startRu, startEn} from "../../../utils/CONSTANT";
 import '../game.css';
 
 const audio = new Audio('/sounds/btn.mp3');
-const startRu = 'Начать';
-const startEn = 'Start';
 
 const Start = ({lang, sound}) => {
 	const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);

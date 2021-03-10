@@ -8,13 +8,11 @@ import Settings from "../settings/settings";
 import {connect} from 'react-redux';
 import Footer from "../footer";
 import {toggleLang, toggleMusic, toggleSize, toggleSound, toggleTopic} from "../../redux/actions";
+import {h1Ru, h1En} from "../../utils/CONSTANT";
 import './App.css';
 
 const audio = new Audio('/sounds/background.mp3');
 audio.loop = true;
-
-const h1Ru = 'Игра на запоминание';
-const h1En = 'Game Memory';
 
 function App({lang, music, sound, topic, size, toggleLang, toggleMusic, toggleSound, toggleTopic}) {
 	const [{contextSettings, contextScore, contextStatistics}, setMenu] = useState(

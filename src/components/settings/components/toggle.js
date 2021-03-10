@@ -9,7 +9,6 @@ const Toggle = ({data, itemSetting, toggle, sound}) => {
 		audio.volume = sound;
 		audio.play();
 	};
-
 	const buttons = data.map((itemSetting) => (
 		<ToggleButton
 			value={itemSetting}

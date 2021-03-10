@@ -47,8 +47,8 @@ const Menu = ({timer, isPlay, setIsPlay, lang, sound}) => {
 			play();
 			setMenu({
 				contextSettings: true,
-				contextScore: contextScore,
-				contextStatistics: contextStatistics
+				contextScore,
+				contextStatistics
 			});
 		}
 	};
@@ -57,9 +57,9 @@ const Menu = ({timer, isPlay, setIsPlay, lang, sound}) => {
 		if (!contextWin && !isPlay) {
 			play();
 			setMenu({
-				contextSettings: contextSettings,
+				contextSettings,
 				contextScore: true,
-				contextStatistics: contextStatistics
+				contextStatistics
 			});
 		}
 	};
@@ -68,8 +68,8 @@ const Menu = ({timer, isPlay, setIsPlay, lang, sound}) => {
 		if (!contextWin && !isPlay) {
 			play();
 			setMenu({
-				contextSettings: contextSettings,
-				contextScore: contextScore,
+				contextSettings,
+				contextScore,
 				contextStatistics: true,
 			});
 		}
@@ -105,7 +105,7 @@ const Menu = ({timer, isPlay, setIsPlay, lang, sound}) => {
 				return (<ItemMenu
 					key={title}
 					title={title}
-					operation={operation}
+					doOperation={operation}
 				/>)
 			})}
 		</div >

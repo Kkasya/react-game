@@ -2,21 +2,16 @@ import {connect} from 'react-redux';
 import React, {useState} from 'react';
 import {toggleSize} from "../../../redux/actions";
 import {Toggle} from "../components";
+import {SIZEARR} from "../../../utils/CONSTANT";
 import {Context2} from "../../context";
-
-const SIZE = [
-	'2*4',
-	'3*4',
-	'3*6',
-];
 
 const SettingsSize = ({size, toggleSize}) => {
 	const [{contextStart, contextExit, contextWin}, setStart] = useState(Context2);
 	const changeSize = (e) => {
 		setStart({
 			contextStart: false,
-			contextExit: contextExit,
-			contextWin: contextWin
+			contextExit,
+			contextWin
 		});
 		toggleSize(e);
 	}
@@ -25,7 +20,7 @@ const SettingsSize = ({size, toggleSize}) => {
 	localStorage.removeItem('game');
 	return (
 		<Toggle
-			data={SIZE}
+			data={SIZEARR}
 			itemSetting={size}
 			toggle={changeSize} />
 	);

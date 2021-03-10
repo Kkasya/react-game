@@ -1,14 +1,9 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useCallback} from 'react';
 import ItemCard from "./item-card";
 import {Context, Context2, Context4} from "../../context";
 import {connect} from "react-redux";
 import getCards from "../../../utils/getCards";
-
-const SIZE = {
-	'2*4': 8,
-	'3*4': 12,
-	'3*6': 18,
-};
+import {SIZE} from "../../../utils/CONSTANT";
 
 const Cards = ({onChangeWin, sound, size}) => {
 	const [, setContextMove] = useContext(Context);
@@ -17,7 +12,7 @@ const Cards = ({onChangeWin, sound, size}) => {
 
 	const countCards = SIZE[size];
 
-	const dataCards = JSON.parse(localStorage.getItem('game')) || getCards(countCards).map((i) => ({...i}));
+	const dataCards = JSON.parse(localStorage.getItem('game')) || getCards(countCards);
 
 	const [{cards, openedCard, countOpen, countGuessed}, changeCard] = useState(
 		{cards: dataCards, openedCard: null, countOpen: 0, countGuessed: 0});
@@ -28,8 +23,17 @@ const Cards = ({onChangeWin, sound, size}) => {
 		audio.play();
 	};
 
+	const saveCards = () => {
+		localStorage.setItem('game', JSON.stringify(cards))
+	};
+
 	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('game')) || getCards(countCards).map((i) => ({...i}));
+		window.addEventListener('unload', saveCards);
+		return () => window.removeEventListener('unload', saveCards);
+	});
+
+	useEffect(() => {
+		const data = JSON.parse(localStorage.getItem('game')) || getCards(countCards);
 		changeCard({
 			cards: data,
 			openedCard: null,
@@ -40,6 +44,7 @@ const Cards = ({onChangeWin, sound, size}) => {
 		setContextMove(Number(move));
 
 	}, [contextStart, size]);
+
 
 	const openCard = (id) => {
 
@@ -57,7 +62,7 @@ const Cards = ({onChangeWin, sound, size}) => {
 			setContextMove((contextMove) => contextMove + 1);
 			elem.isClosed = false;
 			setTimeout(() => checkCards(arr, elem), 300);
-			return {cards: arr, openedCard: openedCard, countOpen: newCountOpen, countGuessed: countGuessed};
+			return {cards: arr, countOpen: newCountOpen};
 		});
 	}
 
@@ -78,7 +83,7 @@ const Cards = ({onChangeWin, sound, size}) => {
 		} else {
 			play('/sounds/wrong.mp3');
 			newCountOpen = 0;
-			arr.map((elem) => {
+			arr.forEach((elem) => {
 				if (!elem.isClosed && !elem.isGuessed) elem.isClosed = true;
 			});
 		}
@@ -86,8 +91,8 @@ const Cards = ({onChangeWin, sound, size}) => {
 		if (newCountGuessed === countCards) {
 			onChangeWin(true);
 			setStart({
-				contextStart: contextStart,
-				contextExit: contextExit,
+				contextStart,
+				contextExit,
 				contextWin: true
 			});
 		}
@@ -99,7 +104,7 @@ const Cards = ({onChangeWin, sound, size}) => {
 			countGuessed: newCountGuessed
 		});
 	};
-	window.addEventListener('unload', () => localStorage.setItem('game', JSON.stringify(cards)));
+
 
 	return (
 		<div className="d-flex cards" >

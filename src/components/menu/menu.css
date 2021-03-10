@@ -9,3 +9,11 @@
     margin: 2rem 0;
     white-space: nowrap;
 }
+
+.font-english {
+    font-size: 2rem;
+}
+
+.font-russian {
+    font-size: 1.5rem;
+}

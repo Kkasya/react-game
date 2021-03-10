@@ -2,18 +2,7 @@ import {connect} from 'react-redux';
 import React from 'react';
 import {toggleTopic} from "../../../redux/actions";
 import {Toggle} from "../components";
-
-const TOPICEN = [
-	'Children`s',
-	'Game of Thrones',
-	'Figures',
-];
-
-const TOPICRU = [
-	'Детская',
-	'Игры престолов',
-	'Фигуры',
-];
+import {TOPICRU, TOPICEN} from "../../../utils/CONSTANT";
 
 const SettingsTopic = ({topic, toggleTopic, lang}) => {
 	const TOPIC = (lang === 'en') ? TOPICEN : TOPICRU;

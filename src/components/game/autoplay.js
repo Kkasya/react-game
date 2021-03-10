@@ -1,23 +1,18 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import ItemCard from "./components/item-card";
 import {connect} from "react-redux";
 import getCards from "../../utils/getCards";
-
-const SIZE = {
-	'2*4': 8,
-	'3*4': 12,
-	'3*6': 18,
-};
+import {SIZE} from "../../utils/CONSTANT";
 
 const audio = new Audio('/sounds/card.mp3');
 
 const Autoplay = ({isPlay, setIsPlay, sound, size}) => {
 	const countCards = SIZE[size];
-	const data = getCards(countCards).map((i) => ({...i}));
+	const data = getCards(countCards);
 	const [cards, changeCard] = useState(data);
 
 	const setData = () => {
-		const data = getCards(countCards).map((i) => ({...i}));
+		const data = getCards(countCards);
 		changeCard(data);
 	};
 

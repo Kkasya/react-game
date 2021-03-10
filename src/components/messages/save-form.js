@@ -1,24 +1,10 @@
 import React, {useState, useContext} from 'react';
 import {Context, Context2, Context4} from "../context";
 import {connect} from "react-redux";
-
+import {formRu, formEn} from "../../utils/CONSTANT";
 import './messages.css';
 
 const audio = new Audio('/sounds/btn.mp3');
-
-const formEn = {
-	user: 'Enter your nickname',
-	save: 'Save the result',
-	close: 'Close',
-	nick: 'Nickname'
-};
-
-const formRu = {
-	user: 'Введите свой никнейм',
-	save: 'Сохранить',
-	close: 'Выйти',
-	nick: 'Никнейм'
-};
 
 const SaveForm = ({timer, win, lang, sound}) => {
 	const [contextMove] = useContext(Context);

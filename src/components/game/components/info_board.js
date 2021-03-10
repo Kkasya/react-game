@@ -1,12 +1,8 @@
 import React, {useContext, useEffect} from 'react';
 import {Context, Context2, Context3, Context4} from "../../context";
 import {connect} from 'react-redux';
+import {timeEn, moveRu, moveEn, timeRu} from "../../../utils/CONSTANT";
 import '../game.css';
-
-const timeEn = 'Time: ';
-const timeRu = 'Время: ';
-const moveEn = 'moves';
-const moveRu = 'ходов';
 
 const InfoBoard = ({timer, isPlay, onChangeTime, lang}) => {
 	const [contextMove] = useContext(Context);
@@ -27,9 +23,6 @@ const InfoBoard = ({timer, isPlay, onChangeTime, lang}) => {
 		};
 	}, [timer, contextExit, contextSave, contextStatistics, contextScore, contextStart, isPlay]);
 
-	useEffect(() => {
-
-	})
 
 	const padTime = (time) => {
 		return String(time).length === 1 ? `0${time}` : `${time}`;

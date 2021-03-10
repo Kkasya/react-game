@@ -1,23 +1,14 @@
 import React from 'react';
 import {connect} from "react-redux";
-
+import {TOPIC, maxCountCards, widthForMaxCountCards, widthForCards} from "../../../utils/CONSTANT";
 import '../game.css';
-
-const TOPIC = {
-  'Children`s': 1,
-  'Game of Thrones': 2,
-  'Figures': 3,
-  'Детская': 1,
-  'Игры престолов': 2,
-  'Фигуры': 3,
-};
 
 const ItemCard = ({el, isClosed, isGuessed, checkCard, countCards, topic}) => {
   const startPath = `/image/theme/${TOPIC[topic]}/`;
 
   const pathImg = (!isGuessed && isClosed) ? 'background.jpg' : `${el}.jpg`;
   const width = {
-    width: (countCards === 18) ? '15.4%' : '20%',
+    width: (countCards === maxCountCards) ? widthForMaxCountCards : widthForCards,
   };
   return (
     <div className="card card-body" style={width} onClick={checkCard}>

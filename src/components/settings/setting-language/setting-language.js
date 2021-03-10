@@ -2,11 +2,7 @@ import {connect} from 'react-redux';
 import React from 'react';
 import {toggleLang} from "../../../redux/actions";
 import {Toggle} from "../components";
-
-const LANGUAGES = [
-	'en',
-	'ru',
-];
+import {LANGUAGES} from "../../../utils/CONSTANT";
 
 const SettingsLanguage = ({lang, toggleLang}) => {
 

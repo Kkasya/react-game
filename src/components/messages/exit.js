@@ -1,22 +1,10 @@
 import React, {useContext} from 'react';
 import {Context2, Context4} from "../context";
 import {connect} from "react-redux";
-
+import {exitRu, exitEn} from "../../utils/CONSTANT";
 import './messages.css';
 
 const audio = new Audio('/sounds/btn.mp3');
-
-const exitEn = {
-	question: 'Are you sure to end the game?',
-	end: 'End the game',
-	close: 'Close',
-};
-
-const exitRu = {
-	question: 'Вы уверены, что хотите закончить игру?',
-	end: 'Закончить игру',
-	close: 'Выйти',
-};
 
 const ExitMessage = ({lang, sound}) => {
 	const [{contextStart, contextExit, contextWin}, setStart] = useContext(Context2);

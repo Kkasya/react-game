@@ -3,12 +3,11 @@ import {Context3} from "../context";
 import {getUsers} from "../../utils";
 import Table from "./components/table";
 import {connect} from "react-redux";
+import {paramEn, paramRu} from "../../utils/CONSTANT";
 import './statistics.css';
 import '../app/App.css';
 
 const audio = new Audio('/sounds/btn.mp3');
-const paramEn = ['User', 'Moves', 'Time', 'Win', 'Lose'];
-const paramRu = ['Имя', 'Ходы', 'Время', 'Победа', 'Проигрыш'];
 
 const Statistics = ({lang, sound}) => {
 	const [{contextStatistics}, setMenu] = useContext(Context3);

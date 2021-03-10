@@ -1,8 +1,7 @@
 import React, {useContext, useEffect} from 'react';
-
-import '../game.css';
 import {Context2, Context4} from "../../context";
 import {connect} from "react-redux";
+import '../game.css';
 
 const audio = new Audio('/sounds/win.mp3')
 const Win = ({sound, lang}) => {
